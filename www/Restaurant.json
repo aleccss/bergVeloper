@@ -1,0 +1,33 @@
+{
+	"restaurant": {
+		"Restaurants": [{
+			"Name": "Restaurant1",
+			"Rating": "2",
+			"About": "About",
+			"Menu": "Menu",
+			"Tables": [{
+				"Id": "1",
+				"x": "1",
+				"y": "2"
+			}],
+			"Bookings": [{
+				"Date": "date",
+				"TableId": "1"
+			}]
+		}, {
+			"Name": "Restaurant2",
+			"Rating": "2",
+			"About": "About",
+			"Menu": "Menu",
+			"Tables": [{
+				"Id": "1",
+				"x": "1",
+				"y": "2"
+			}],
+			"Bookings": [{
+				"Date": "date",
+				"TableId": "1"
+			}]
+		}]
+	}
+}
