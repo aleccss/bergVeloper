@@ -28,22 +28,81 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <title>book'n'eat</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+      <div class="container">
+        <div class="row" style="height: 40px;">
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <div class="row">
+          <div class="col-md-9">
+            <img src="img/logo.png" style="width: 120px; height: 200px; margin-left: auto; margin-right: auto; display: block;"/>
+          </div>
+        </div>
+        <div class="row" style="height: 40px;">
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-2">
+            <p>Username:</p>
+          </div>
+          <div class="col-xs-6">
+            <input class="input"></input>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-2">
+            <p>Password:</p>
+          </div>
+          <div class="col-xs-6">
+            <input class="input" type="password"></input>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-4">
+            <button type="button" class="btn" id="signUpButton">Sign Up</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="button" class="btn" id="signInButton">Sign In</button>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-5"></div>
+          <div class="col-xs-2">
+            <a href="#">Not now</a>
+          </div>
+          <div class="col-xs-5"></div>
+        </div>
+        <div class="row" style="height: 40px" ></div>
+      </div>
+      <div class="container">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-4">
+          <button type="button" class="btn btn-info" id="FbButton" style="border-radius: 48px; height: 44px;">Fb</button>
+        </div>
+        <div class="col-xs-4">
+          <button type="button" class="btn btn-warning" id="GoogleButton" style="border-radius: 48px; height: 44px;">G+</button>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div id="test123">
+
+      </div>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+
     </body>
 </html>
