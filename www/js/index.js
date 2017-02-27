@@ -29,37 +29,6 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        // window.cordovaHTTP.get("http://localhost:8080/restaurants", {}, {},
-        // function(response) {
-        //
-        //     alert(response);
-        // }, function(response) {
-        //
-        //     alert(response);
-        // });
-        var model = new Model();
-        var getJSON = function(url){
-          return new Promise(function(resolve, reject){
-            var xhr = new XMLHttpRequest();
-            xhr.open('get', url, true);
-            xhr.responseType = 'json';
-            xhr.onload = function() {
-              var status = xhr.status;
-              if(status == 200) {
-                resolve(xhr.response);
-              } else {
-                reject(status);
-              }
-            };
-            xhr.send();
-          });
-        };
-
-        getJSON('http://localhost:8080/restaurants').then(function(data){
-          alert('here is the json', data);
-        }, function(status){
-          alert('something went wrong');
-        });
 
         this.receivedEvent('deviceready');
     },
