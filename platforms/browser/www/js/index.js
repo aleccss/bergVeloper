@@ -16,11 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var restaurants;
 var app = {
     // Application Constructor
     initialize: function() {
         // TO-DO - check if there is internet and load data from local
-
+        Model.getRestaurants().then(function(data){
+          restaurants = data;
+        });
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -29,10 +32,6 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        var test;
-        Model.getRestaurants().then(function(data){
-          test = data;
-        });
         this.receivedEvent('deviceready');
     },
 

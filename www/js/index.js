@@ -16,11 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var restaurants;
 var app = {
     // Application Constructor
     initialize: function() {
         // TO-DO - check if there is internet and load data from local
-        var restaurants;
         Model.getRestaurants().then(function(data){
           restaurants = data;
         });
