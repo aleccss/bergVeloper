@@ -16,11 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-var require,define;
 var app = {
     // Application Constructor
     initialize: function() {
+        // TO-DO - check if there is internet and load data from local
+
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -29,38 +29,10 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        // window.cordovaHTTP.get("http://localhost:8080/restaurants", {}, {},
-        // function(response) {
-        //
-        //     alert(response);
-        // }, function(response) {
-        //
-        //     alert(response);
-        // });
-        var model = new Model();
-        var getJSON = function(url){
-          return new Promise(function(resolve, reject){
-            var xhr = new XMLHttpRequest();
-            xhr.open('get', url, true);
-            xhr.responseType = 'json';
-            xhr.onload = function() {
-              var status = xhr.status;
-              if(status == 200) {
-                resolve(xhr.response);
-              } else {
-                reject(status);
-              }
-            };
-            xhr.send();
-          });
-        };
-
-        getJSON('http://localhost:8080/restaurants').then(function(data){
-          alert('here is the json', data);
-        }, function(status){
-          alert('something went wrong');
+        var test;
+        Model.getRestaurants().then(function(data){
+          test = data;
         });
-
         this.receivedEvent('deviceready');
     },
 

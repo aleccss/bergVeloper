@@ -1,8 +1,5 @@
-function Model(){
-  this.name = "asd";
-}
-
-function myFunction(){
+var Model = {
+  getRestaurants : function(){
     var getJSON = function(url){
       return new Promise(function(resolve, reject){
         var xhr = new XMLHttpRequest();
@@ -20,9 +17,11 @@ function myFunction(){
       });
    };
 
-   getJSON('https://afternoon-island-10304.herokuapp.com/restaurants').then(function(data){
-      alert('here is the json', data);
+   return getJSON('https://afternoon-island-10304.herokuapp.com/restaurants').then(function(data){
+      return data;
    }, function(status){
-      alert('something went wrong');
+      result = { error : 'something went wrong' };
    });
-}
+
+  }
+};
