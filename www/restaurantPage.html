@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://fb.me/react-15.2.0.js"></script>
+<script src="https://fb.me/react-dom-15.2.0.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant Bookings Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#myTab li:eq(1) a").tab('show');var date_input=$('input[name="date"]'); //our date input has the name "date"
+	var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+	var options={
+		format: 'mm/dd/yyyy',
+		container: container,
+		todayHighlight: true,
+		autoclose: true,
+	};
+	date_input.datepicker(options);
+});
+</script>
+<style type="text/css">
+	.bs-example{
+		margin: 20px;
+	}
+	body{
+		margin:0;
+		padding:0;
+	}
+	p {
+    text-indent: 20px;
+	}
+	.tablesLayout{
+		border:pink 1px solid;
+		width:200px;
+		height:200px;
+	}
+	.tableLayout{
+		border:pink 1px solid;
+		width:50px;
+		height:50px;
+	}
+</style>
+</style>
+</head>
+<body>
+<div id="reactApp">
+	
+</div>
+<script type="text/babel">	 
+	
+	var myObject = {
+		"CurrentRestaurant" : "1",
+		"CurrentPage" : "display",
+        "Restaurants": [{
+          "Id":"1",
+          "Name": "David Burke Kitchen",
+		  "Picture":"restaurant1.jpg",
+          "Rating": "2",
+          "About": "Located in the James Hotel New York, David Burke Kitchen opened in 2010 and is overseen by Executive Chef Raoul Whitaker. Kitchen features an interior inspired by the surrounding SoHo neighborhood, blending the cool, industrial simplicity of an airy loft with the rustic warmth of a country barn.;At the entrance, a staircase leads up to the glass-enclosed Treehouse Bar, where guests can enjoy private dinners with handcrafted cocktails and an array of homemade sweet and savory snacks such as Green Circle Chicken Dumplings and Maine Lobster Toast.Downstairs, the 130-seat, loft-like space is divided into a bar and dining room with denim banquettes, a barn roof and a blackened steel bar top.;The open kitchen and glass-enclosed wine cave allow guests a peek behind the scenes, where Chef Whitaker’s classic technique and contemporary style are reflected in main courses ranging from Braised Short Ribs with Semolina Gnocchi to Long Island Duck with Sweet Potato Puree and Stone Fruit Gastrique.;David Burke Kitchen's unparalleled outdoor space The Garden, has its own bar, seating for 130 and room for cocktail parties up to 300. The atmosphere here reflects a more casual vibe, and the drink menu is a downtown favorite, featuring beer, wine and inventive specialty cocktails made with fresh, top shelf ingredients. David Burke Kitchen brings our distinctive approach to SoHo, making imaginative cooking style accessible to downtown New Yorkers and visitors alike, for breakfast, lunch and dinner daily.",
+          "Menu": "TRUFFLE SHUFFLE;£13.95;White sauce, fontal, balsamic onions,; free-range egg & black truffle;JULIETTA;£11.95;Slow-roasted tomatoes, basil, the best buffalo mozzarella & aged Parmesan;Make it veggie – just ask;GENNARO’S SPICY SAUSAGE;£11.95;Sweet tomato sauce, chilli, Cobble Lane spicy pork sausage, garlicky cime di rapa & Westcombe Jacks cheese;THE PORKIE;£12.95;Sweet tomato sauce, Cobble Lane pepperoni, smoky pancetta & spicy salami with Westcombe Jacks cheese & oregano",
+          "Tables": [{
+            "Id": "1",
+			"Status":"1",
+            "x": "1",
+            "y": "2"
+          },{
+            "Id": "1",
+			"Status":"2",
+            "x": "1",
+            "y": "2"
+          },{
+            "Id": "3",
+			"Status":"1",
+            "x": "1",
+            "y": "2"
+          }],
+          "Bookings": [{
+            "Date": "date",
+            "TableId": "1"
+          }]
+        }, {
+          "Id":"2",
+          "Name": "Restaurant2",
+		  "Picture":"restaurant2.jpg",
+          "Rating": "2",
+          "About": "This is the first line of Restaurant2 About;This is the second line of Restaurant2 About;This is more of Restaurant2 About...",
+          "Menu": "This is the first line of Restaurant2 Menu;This is the second line of Restaurant2 Menu;This is more of Restaurant2 Menu...",
+          "Tables": [{
+            "Id": "1",
+            "x": "1",
+            "y": "2"
+          }],
+          "Bookings": [{
+            "Date": "date",
+            "TableId": "1"
+          }]
+        }]
+    };
+	
+	class AllRestaurants extends React.Component{
+		render() {
+			var list = this.props.restaurants;
+			var state = this.props.state.getState();
+			return (
+				<div className="container">
+					<div className="row">
+						<h3><p>All Restaurants</p></h3> 
+						<div>
+							{list.map(function(item,index){
+								return <p key={ index } >{item.Name}</p>;
+							})}
+						</div>
+						<button onClick={goToRestaurantPage(state)} className="btn btn-lg btn-warning"><span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Go to restaurant page</button>
+					</div>
+				</div>
+			);
+		}
+	}
+	
+	class Header extends React.Component{
+		render() {
+			var name = this.props.name;
+			var imageSrc = this.props.picture;
+			return (
+				<div className="container">
+					<div className="row">
+						<div id="picture" className="col-xs-3" style={{ display : "block" }}>
+							<img src={imageSrc} />
+						</div>
+						<h3><div id="name" className="col-xs-9">{name}</div></h3>
+					</div>
+				</div>
+			);
+		}
+	}
+	
+	class Tabs extends React.Component{
+		render() {
+		var about = parseProp(this.props.about);
+		var menu = parseProp(this.props.menu);
+		var tables = this.props.tables;
+			return (
+				<div className="container">
+					<div className="row">
+						<div className="bs-example col-xs-12">
+							<ul className="nav nav-tabs" id="myTab">
+								<li><a data-toggle="tab" href="#aboutTab">About</a></li>
+								<li><a data-toggle="tab" href="#menuTab">Menu</a></li>
+								<li><a data-toggle="tab" href="#bookingsTab">Bookings</a></li>
+							</ul>
+							<div className="tab-content">
+								<div id="aboutTab" className="tab-pane fade in active">
+									 <div>
+										{about.map(function(item,index){
+											return <p key={ index } >{item}</p>;
+										})}
+									</div>
+								</div>
+								<div id="menuTab" className="tab-pane fade">
+									 <div>
+										{menu.map(function(item,index){
+											return <p key={ index }>{item}</p>;
+										})}
+									</div>
+								</div>
+								<div id="bookingsTab" className="tab-pane fade">
+									 <input className="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> 
+									 <div id="tables">
+										<div className="column" className="tablesLayout">
+											{tables.map(function(item,index){
+											if(item.Status==="1"){
+												return <img src="table.jpg" key={ index }></img>;
+											}else{
+												return <img src="table1.jpg" key={ index }></img>;
+											}
+										})}
+										</div>
+									 </div>					 
+								</div>
+								<br />
+							</div>
+						</div>
+					</div>
+				</div>		
+			);
+		}
+	}
+
+	function goToRestaurantPage(state){
+		 state.CurrentPage = "display";
+		 state.CurrentRestaurant = state.CurrentRestaurant;
+	}	
+
+	function parseProp(prop){
+		var results = [];
+		var array = prop.split(";");
+		return array;
+	}
+	
+	function makeTable(table){
+		var tableId = table.Id;
+		return React.createElement("div",
+			{style:{"border":"black 1px solid"},
+		     key : tableId},
+			"Table " + tableId);
+	}
+	
+	function createLayoutTables(prop){
+		return prop.map(makeTable);			
+    };
+	
+	function renderLayoutTables(data, prop){
+      var item=getById(id,data);
+	  return React.createElement("div",null, createLayoutTables(item[prop]));
+    };
+	var RestaurantTables = function(propName){
+		
+	};
+	
+	
+	function findRestaurant(state){
+		var array = state.Restaurants;
+		var id = state.CurrentRestaurant;
+		return array.find((item) => item.Id === id ); 
+	}
+	
+	class App extends React.Component {
+		render() {
+			var state = this.props.state;
+			var currentRestaurant = findRestaurant(state.getState());
+			var currentPage = state.getState().CurrentPage;
+			if(currentPage === "all"){
+				return (
+					<div>
+						<AllRestaurants restaurants={state.getState().Restaurants} state={state}/>			
+					</div>
+				);
+			}else{
+					return (
+				<div>
+					<Header name={currentRestaurant.Name}  picture={currentRestaurant.Picture}/>
+					<Tabs about={currentRestaurant.About} menu={currentRestaurant.Menu} tables={currentRestaurant.Tables}/>					
+				</div>
+				);
+			}
+		}
+	}
+	
+	function render(state){
+		ReactDOM.render(<App state={state}/>, document.getElementById("reactApp"));
+	}
+	
+	
+	function State(initialState, handler){
+		var s = {};
+	
+		function dispatch(action){
+			initialState = handler(initialState, action);
+			render(this);
+		}
+		
+		function getState(){
+			return initialState;
+		}
+		
+		s.dispatch = dispatch.bind(s);
+		s.getState = getState.bind(s);
+		
+		return s;
+	}
+	
+	
+	
+	function currentRestaurantHandler(state, action){
+		if(action.Type === "changeRestaurant"){
+			return {
+				...state,
+				CurrentRestaurant : action.Payload
+			};
+		}
+		return state;
+	}
+	
+	function currentPageHandler(state, action){
+		if(action.Type === "changePage"){
+			return {
+				...state,
+				CurrentPage : action.Payload.CurrentPage
+			};
+		}
+		return state;
+	}
+	
+	
+	function handler(state, action){
+		var state = currentRestaurantHandler(state, action);
+		state = currentPageHandler(state,action);
+		return state;
+	}
+	
+	var appState = new State(myObject, handler);
+	window.appState = appState;
+	render(appState);
+		
+</script>
+
+
+</body>
+</html>
