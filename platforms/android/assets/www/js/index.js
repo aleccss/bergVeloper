@@ -16,9 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var restaurants;
 var app = {
     // Application Constructor
     initialize: function() {
+        // TO-DO - check if there is internet and load data from local
+        Model.getRestaurants().then(function(data){
+          restaurants = data;
+        });
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -33,11 +38,11 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+      //  var listeningElement = parentElement.querySelector('.listening');
+      //  var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        //listeningElement.setAttribute('style', 'display:none;');
+        //receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
     }
