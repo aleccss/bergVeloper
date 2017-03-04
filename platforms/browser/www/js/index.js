@@ -17,12 +17,16 @@
  * under the License.
  */
 var restaurants;
+var users;
 var app = {
     // Application Constructor
     initialize: function() {
         // TO-DO - check if there is internet and load data from local
         Model.getRestaurants().then(function(data){
           restaurants = data;
+        });
+        Model.getUsers().then(function(data){
+          users = data;
         });
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
@@ -49,3 +53,48 @@ var app = {
 };
 
 app.initialize();
+
+var signUpPopup = document.getElementById("signUpPopup");
+var signUpButton = document.getElementById("signUpButton");
+var span = document.getElementsByClassName("close")[0];
+var saveUser = document.getElementById("saveUserButton");
+
+signUpButton.onclick = function() {
+  signUpPopup.style.display = "block";
+};
+
+span.onclick = function() {
+  signUpPopup.style.display = "none";
+};
+
+saveUser.onclick = function() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var phone = document.getElementById("phone").value;
+  var lastId = 0;
+  for(i in users){
+    if(users[i].username === username){
+      console.log("error");
+      return;
+    }
+    lastId = parseInt(users[i]._id);
+  }
+  if(username !== "" && password !== "" && phone !== ""){
+    var id = lastId + 1;
+    var user = {
+      '_id' : id.toString(),
+      'username' : username,
+      'password' : password,
+      'phone' : phone,
+      'bookings' : []
+    }
+    Model.setUser(user);
+  }
+  console.log(username + "|" + password + "|" + phone);
+};
+
+window.onclick = function(event) {
+  if(event.target == signUpPopup) {
+    signUpPopup.style.display = "none";
+  }
+}

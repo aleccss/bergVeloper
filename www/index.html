@@ -34,7 +34,49 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script type="text/javascript" src="js/imports/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/imports/jquery.mobile-1.4.5.min.js"></script>
         <title>book'n'eat</title>
+        <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        </style>
     </head>
     <body>
       <div class="container">
@@ -73,6 +115,20 @@
           <div class="col-xs-2"></div>
           <div class="col-xs-4">
             <button type="button" class="btn" id="signUpButton">Sign Up</button>
+            <div id="signUpPopup" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <h3>SignUp Information</h3>
+                  <label for="username">Username:</label>
+                  <input type="text" name="user" id="username" placeholder="username">
+                  <label for="password">Password:</label>
+                  <input type="password" name="password" id="password" placeholder="password">
+                  <label for="username">Phone no.:</label>
+                  <input type="text" name="phone" id="phone">
+                  <button type="button" class="btn" id="saveUserButton">Save</button>
+                </div>
+            </div>
+
           </div>
           <div class="col-xs-4">
             <button type="button" class="btn" id="signInButton">Sign In</button>
@@ -105,6 +161,6 @@
 
       <script type="text/javascript" src="js/model.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
-      <script type="text/javascript" src="js/index.js"></script>      
+      <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
