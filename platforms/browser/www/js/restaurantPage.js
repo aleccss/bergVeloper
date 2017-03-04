@@ -1,18 +1,33 @@
 
-	class AllRestaurants extends React.Component{
+var globalData;
+
+class AllRestaurants extends React.Component{
 		render() {
 			var list = this.props.restaurants;
+			var filtered = this.props.filtered;
 			var state = this.props.state.getState();
 			return (
 				<div className="container">
 					<div className="row">
-						<h3><p>All Restaurants</p></h3>
 						<div>
-							{list.map(function(item,index){
-								return <p key={ index } >{item.Name}</p>;
-							})}
+						 <div className="container">
+							<div className="row" >
+							</div>
+							<div className="row h">
+								<div className="col-xs-12 logo-container">
+									<img className="logo" src="logo2.jpg"></img>
+								</div>
+							</div>
 						</div>
-						<button onClick={goToRestaurantPage(state)} className="btn btn-lg btn-warning"><span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Go to restaurant page</button>
+						<div className="container">
+							<div className="row">
+								<div className="search">
+									<InstantBox data={list}/>
+								</div>
+
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 			);
@@ -88,9 +103,103 @@
 		}
 	}
 
+	var InstantBox = React.createClass({
+    doSearch:function(queryText){
+        console.log(queryText)
+        //get query result
+        var queryResult=[];
+        this.props.data.forEach(function(item){
+            if(item.Name.toLowerCase().indexOf(queryText)!=-1)
+            queryResult.push(item);
+        });
+
+        this.setState({
+            query:queryText,
+            filteredData: queryResult
+        })
+    },
+    getInitialState:function(){
+        return{
+            query:'',
+            filteredData: this.props.data
+        }
+    },
+    render:function(){
+        return (
+            <div className="InstantBox">
+                <SearchBox query={this.state.query} doSearch={this.doSearch}/>
+                <DisplayTable data={this.state.filteredData}/>
+            </div>
+        );
+    }
+});
+
+var SearchBox = React.createClass({
+    doSearch:function(){
+        var query=this.refs.searchInput.value; // this is the search text
+        this.props.doSearch(query);
+    },
+    render:function(){
+        return <input className="searchbar-edit" type="text" ref="searchInput" placeholder="Search Restaurant" value={this.props.query} onChange={this.doSearch}/>
+    }
+});
+
+var DisplayTable = React.createClass({
+      doSearch:function(queryText){
+        console.log(queryText)
+        //get query result
+        var queryResult=[];
+        this.props.data.forEach(function(item){
+            if(item.Name.toLowerCase().indexOf(queryText)!=-1)
+            queryResult.push(i);
+        });
+
+        this.setState({
+            query:queryText,
+            filteredData: queryResult
+        })
+    },
+
+    render:function(){
+        var rows=[];
+        this.props.data.forEach(function(item,index) {
+        rows.push(<tr key={ index }  onClick={() => displayRestaurant(item.Id)}><td>
+						<div className="container">
+							<div className="row">
+								<div className="col-xs-12 restaurant">
+									<div className="col-xs-2 dot"></div>
+									<div className="col-xs-4">
+										<p>{item.Name}</p>
+									</div>
+									<div className="col-xs-4 rating">
+
+										<p>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</p>
+									</div>
+								</div>
+							</div>
+						</div>
+				</td></tr>)
+        });
+        return(
+             <table>
+                <tbody>{rows}</tbody>
+            </table>
+        );
+    }
+});
+	function displayRestaurant(id){
+		var data = globalData;
+		data[0].CurrentRestaurant = id;
+		data[0].CurrentPage = "display";
+		var appState = new State(data, handler);
+  	window.appState = appState;
+  	render(appState);
+		console.log("click pe restaurantul cu id:"+id);
+	}
+
 	function goToRestaurantPage(state){
-		 state.CurrentPage = "display";
-		 state.CurrentRestaurant = state.CurrentRestaurant;
+		 state[0].CurrentPage = "display";
+		 state[0].CurrentRestaurant = state.CurrentRestaurant;
 	}
 
 	function parseProp(prop){
@@ -99,52 +208,46 @@
 		return array;
 	}
 
-	function makeTable(table){
-		var tableId = table.Id;
-		return React.createElement("div",
-			{style:{"border":"black 1px solid"},
-		     key : tableId},
-			"Table " + tableId);
+	function findRestaurant(state){
+		var array = state[0].Restaurants;
+		var id = state[0].CurrentRestaurant;
+		return array.find((item) => item.Id === id );
 	}
 
-	function createLayoutTables(prop){
-		return prop.map(makeTable);
-    };
+	function findCurrentPage(state){
+			var currentPage = state.getState()[0].CurrentPage;
+			var app;
+			if(currentPage === "all"){
+				app=
+					<div>
+						<AllRestaurants restaurants={state.getState()[0].Restaurants} filtered={state.getState()[0].Filtered} state={state}/>
+					</div>
+				;
+			}else{
+				app=
+					<div>
+						<DisplayRestaurant state={state}/>
+					</div>
+				;
+			}
+			return app;
+	}
 
-	function renderLayoutTables(data, prop){
-      var item=getById(id,data);
-	  return React.createElement("div",null, createLayoutTables(item[prop]));
-    };
-	var RestaurantTables = function(propName){
-
-	};
-
-
-	function findRestaurant(state){
-		var array = state.Restaurants;
-		var id = state.CurrentRestaurant;
-		return array.find((item) => item.Id === id );
+	class DisplayRestaurant extends React.Component{
+		render(){
+			var currentRestaurant = findRestaurant(this.props.state.getState());
+			return <div>
+								<Header name={currentRestaurant.Name}  picture={currentRestaurant.Picture}/>
+								<Tabs about={currentRestaurant.About} menu={currentRestaurant.Menu} tables={currentRestaurant.Tables}/>
+							</div>
+		}
 	}
 
 	class App extends React.Component {
 		render() {
 			var state = this.props.state;
-			var currentRestaurant = findRestaurant(state.getState()[0]);
-			var currentPage = state.getState().CurrentPage;
-			if(currentPage === "all"){
-				return (
-					<div>
-						<AllRestaurants restaurants={state.getState()[0].Restaurants} state={state}/>
-					</div>
-				);
-			}else{
-					return (
-				<div>
-					<Header name={currentRestaurant.Name}  picture={currentRestaurant.Picture}/>
-					<Tabs about={currentRestaurant.About} menu={currentRestaurant.Menu} tables={currentRestaurant.Tables}/>
-				</div>
-				);
-			}
+			var app = findCurrentPage(state);
+			return app;
 		}
 	}
 
@@ -193,15 +296,17 @@
 		return state;
 	}
 
+
 	function handler(state, action){
 		var state = currentRestaurantHandler(state, action);
 		state = currentPageHandler(state,action);
 		return state;
 	}
 
-  Model.getRestaurants().then(function(data){
+	Model.getRestaurants().then(function(data){
+		globalData = data;
     data[0].CurrentRestaurant = "1";
-		data[0].CurrentPage = "display";
+		data[0].CurrentPage = "all";
     var appState = new State(data, handler);
   	window.appState = appState;
   	render(appState);
