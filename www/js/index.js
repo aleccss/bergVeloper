@@ -88,10 +88,25 @@ saveUser.onclick = function() {
       'phone' : phone,
       'bookings' : []
     }
-    Model.setUser(user);
+    Model.saveUser(user);
   }
   console.log(username + "|" + password + "|" + phone);
 };
+
+signInButton.onclick = function() {
+   var username = document.getElementById("loginUsername").value;
+   var password = document.getElementById("loginPassword").value;
+   for(i in users){
+      if((users[i].username === username) && (users[i].password === password)){
+         var session = Session().getInstance();
+         session.username = users[i].username;
+         session.bookings = users[i].bookings;
+         console.log("success");
+         return location.href='restaurantPage.html';
+      }
+   }
+   console.log("invalidUser");
+}
 
 window.onclick = function(event) {
   if(event.target == signUpPopup) {

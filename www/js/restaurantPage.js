@@ -19,6 +19,81 @@
 		}
 	}
 
+	class LoginPage extends React.Component{
+		render() {
+			return (
+		<div class="container">
+        <div class="row" style="height: 60px;">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img src="img/logo.jpg" style="width: 120px; height: 120px; margin-left: auto; margin-right: auto; display: block;"/>
+          </div>
+        </div>
+        <div class="row" style="height: 40px;">
+        </div>
+      </div>
+      <div class="container input-group">
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8" style="margin: 5px;">
+            <input id="loginUsername" class="form-control" placeholder="Username" style="position: initial;"></input>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8" style="margin: 5px;">
+            <input id="loginPassword" class="form-control" type="password" placeholder="Password" style="position: initial;"></input>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-5">
+            <button type="button" class="btn" onclick="signUpButtonClicked" style="background-color: black; color: white; width:100px; margin: 5px; margin-left: auto; margin-right: auto; display: block;">Register</button>
+            <div id="signUpPopup" class="modal">
+                <div class="modal-content input-group">
+                  <span class="close" onclick="spanClick">&times;</span>
+                  <p class="myClass">SignUp Information</p>                  
+                  <input type="text" class="form-control" name="user" id="username" placeholder="username" style="margin: 5px;">                  
+                  <input type="password" class="form-control" name="password" id="password" placeholder="password" style="margin: 5px;">                  
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" style="margin: 5px;">
+                  <button type="button" class="btn" onclick="saveUser" style="margin: 5px; width:100%">Save</button>
+                </div>
+            </div>
+
+          </div>
+          <div class="col-xs-5">
+            <button type="button" class="btn" onclick="signInClick" style="background-color: black; color: white; width:100px; margin: 5px; margin-left: auto; margin-right: auto; display: block;">Sign In</button>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-6">
+            <a href="restaurantPage.html" class="label label-default" style="display: block; margin-top: 10px;">Not now</a>
+          </div>
+          <div class="col-xs-3"></div>
+        </div>
+        <div class="row" style="height: 40px" ></div>
+      </div>
+      <div class="container">
+         <div class="row">
+           <div class="col-xs-2"></div>
+           <div class="col-xs-4">
+             <img id="FbButton" src="img/icons/facebook.png" style="width:70px; margin-left: auto; margin-right: auto; display: block;"></img>
+           </div>
+           <div class="col-xs-4">
+             <img id="GoogleButton" src="img/icons/googlePlus.png" style="width:70px; margin-left: auto; margin-right: auto; display: block;"></img>
+           </div>
+           <div class="col-xs-2"></div>
+        </div>
+      </div>
+		);
+	}
+	}
+
 	class Header extends React.Component{
 		render() {
 			var name = this.props.name;
@@ -115,10 +190,6 @@
       var item=getById(id,data);
 	  return React.createElement("div",null, createLayoutTables(item[prop]));
     };
-	var RestaurantTables = function(propName){
-
-	};
-
 
 	function findRestaurant(state){
 		var array = state.Restaurants;
@@ -131,7 +202,12 @@
 			var state = this.props.state;
 			var currentRestaurant = findRestaurant(state.getState()[0]);
 			var currentPage = state.getState().CurrentPage;
-			if(currentPage === "all"){
+			if(currentPage === 'login'){
+				return (<div>
+					<LoginPage/>
+					</div>
+				);				
+			} else if(currentPage === "all"){
 				return (
 					<div>
 						<AllRestaurants restaurants={state.getState()[0].Restaurants} state={state}/>
@@ -152,7 +228,6 @@
 		ReactDOM.render(<App state={state}/>, document.getElementById("reactApp"));
 	}
 
-
 	function State(initialState, handler){
 		var s = {};
 
@@ -170,9 +245,7 @@
 
 		return s;
 	}
-
-
-
+	
 	function currentRestaurantHandler(state, action){
 		if(action.Type === "changeRestaurant"){
 			return {
@@ -198,11 +271,10 @@
 		state = currentPageHandler(state,action);
 		return state;
 	}
-
-  Model.getRestaurants().then(function(data){
-    data[0].CurrentRestaurant = "1";
-		data[0].CurrentPage = "display";
+	
+	var data = [];
+	data.push({CurrentPage : 'login'});
     var appState = new State(data, handler);
-  	window.appState = appState;
-  	render(appState);
-  });
+  	 window.appState = appState;
+  	 render(appState);
+ 

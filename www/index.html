@@ -83,84 +83,74 @@
         <div class="row" style="height: 40px;">
         </div>
         <div class="row">
-          <div class="col-md-9">
-            <img src="img/logo.png" style="width: 120px; height: 200px; margin-left: auto; margin-right: auto; display: block;"/>
+          <div class="col-md-12">
+            <img src="img/logo.jpg" style="width: 120px; height: 120px; margin-left: auto; margin-right: auto; display: block;"/>
           </div>
         </div>
         <div class="row" style="height: 40px;">
         </div>
       </div>
-      <div class="container">
+      <div class="container input-group">
         <div class="row">
           <div class="col-xs-2"></div>
-          <div class="col-xs-2">
-            <p>Username:</p>
-          </div>
-          <div class="col-xs-6">
-            <input class="input"></input>
+          <div class="col-xs-8" style="margin: 5px;">
+            <input id="loginUsername" class="form-control" placeholder="Username" style="position: initial;"></input>
           </div>
           <div class="col-xs-2"></div>
         </div>
         <div class="row">
           <div class="col-xs-2"></div>
-          <div class="col-xs-2">
-            <p>Password:</p>
-          </div>
-          <div class="col-xs-6">
-            <input class="input" type="password"></input>
+          <div class="col-xs-8" style="margin: 5px;">
+            <input id="loginPassword" class="form-control" type="password" placeholder="Password" style="position: initial;"></input>
           </div>
           <div class="col-xs-2"></div>
         </div>
-        <div class="row">
-          <div class="col-xs-2"></div>
-          <div class="col-xs-4">
-            <button type="button" class="btn" id="signUpButton">Sign Up</button>
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-5">
+            <button type="button" class="btn" id="signUpButton" style="background-color: black; color: white; width:100px; margin: 5px; margin-left: auto; margin-right: auto; display: block;">Register</button>
             <div id="signUpPopup" class="modal">
-                <div class="modal-content">
+                <div class="modal-content input-group">
                   <span class="close">&times;</span>
-                  <h3>SignUp Information</h3>
-                  <label for="username">Username:</label>
-                  <input type="text" name="user" id="username" placeholder="username">
-                  <label for="password">Password:</label>
-                  <input type="password" name="password" id="password" placeholder="password">
-                  <label for="username">Phone no.:</label>
-                  <input type="text" name="phone" id="phone">
-                  <button type="button" class="btn" id="saveUserButton">Save</button>
+                  <p>SignUp Information</p>                  
+                  <input type="text" class="form-control" name="user" id="username" placeholder="username" style="margin: 5px;">                  
+                  <input type="password" class="form-control" name="password" id="password" placeholder="password" style="margin: 5px;">                  
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" style="margin: 5px;">
+                  <button type="button" class="btn" id="saveUserButton" style="margin: 5px; width:100%">Save</button>
                 </div>
             </div>
 
           </div>
-          <div class="col-xs-4">
-            <button type="button" class="btn" id="signInButton">Sign In</button>
+          <div class="col-xs-5">
+            <button type="button" class="btn" id="signInButton" style="background-color: black; color: white; width:100px; margin: 5px; margin-left: auto; margin-right: auto; display: block;">Sign In</button>
           </div>
-          <div class="col-xs-2"></div>
+          <div class="col-xs-1"></div>
         </div>
         <div class="row">
-          <div class="col-xs-5"></div>
-          <div class="col-xs-2">
-            <a href="#">Not now</a>
+          <div class="col-xs-3"></div>
+          <div class="col-xs-6">
+            <a href="restaurantPage.html" class="label label-default" style="display: block; margin-top: 10px;">Not now</a>
           </div>
-          <div class="col-xs-5"></div>
+          <div class="col-xs-3"></div>
         </div>
         <div class="row" style="height: 40px" ></div>
       </div>
       <div class="container">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-4">
-          <button type="button" class="btn btn-info" id="FbButton" style="border-radius: 48px; height: 44px;">Fb</button>
+         <div class="row">
+           <div class="col-xs-2"></div>
+           <div class="col-xs-4">
+             <img id="FbButton" src="img/icons/facebook.png" style="width:70px; margin-left: auto; margin-right: auto; display: block;"></img>
+           </div>
+           <div class="col-xs-4">
+             <img id="GoogleButton" src="img/icons/googlePlus.png" style="width:70px; margin-left: auto; margin-right: auto; display: block;"></img>
+           </div>
+           <div class="col-xs-2"></div>
         </div>
-        <div class="col-xs-4">
-          <button type="button" class="btn btn-warning" id="GoogleButton" style="border-radius: 48px; height: 44px;">G+</button>
-        </div>
-        <div class="col-xs-2"></div>
-      </div>
-      <div id="test123">
-
-
       </div>
 
       <script type="text/javascript" src="js/model.js"></script>
-      <script type="text/javascript" src="cordova.js"></script>
+      <!--<script type="text/javascript" src="cordova.js"></script>-->
+      <script type="text/javascript" src="js/session.js"></script>
       <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

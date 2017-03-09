@@ -46,7 +46,7 @@ var Model = {
      result = { error : 'something went wrong' };
   });
 },
-setUser : function(data){
+saveUser : function(data){
    return this.setJSON('https://afternoon-island-10304.herokuapp.com/users', data).then(function(data){
       return data;
    }, function(status){
