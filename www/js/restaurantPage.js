@@ -78,6 +78,7 @@ class LoginPage extends React.Component{
 }
 }
 function notNowClick(){
+	globalData = Session.restaurants;
 	var data = globalData;
 	data[0].CurrentPage = "all";
 	var appState = new State(data, handler);
@@ -397,16 +398,10 @@ var DisplayTable = React.createClass({
 		return state;
 	}
 
-	Model.getRestaurants().then(function(data){
-		if(globalData){
 
-		} else{
-		globalData = data;
 
-    data[0].CurrentRestaurant = "1";
-		data[0].CurrentPage = "login";
-    var appState = new State(data, handler);
-  	window.appState = appState;
-  	render(appState);
-	}
-  });
+	var data = [];
+	data.push({CurrentPage : "login"});
+  var appState = new State(data, handler);
+  window.appState = appState;
+  render(appState);
