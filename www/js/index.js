@@ -31,8 +31,9 @@ var app = {
         Model.getUsers().then(function(data){
           users = data;
           Session.setUsers(data);
-          document.addEventListener('deviceready', that.onDeviceReady.bind(this), false);
+          
         });
+        document.addEventListener('deviceready', that.onDeviceReady.bind(this), false);
     },
 
     // deviceready Event Handler
