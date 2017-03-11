@@ -1,6 +1,95 @@
 
 var globalData;
 
+class LoginPage extends React.Component{
+	render() {
+		return (
+			<div>
+			<div className="container">
+				<div className="row">
+				</div>
+			<div className="row">
+				<div className="col-md-12">
+					<img src="img/logo.jpg"/>
+				</div>
+			</div>
+			<div className="row" >
+			</div>
+		</div>
+		<div className="container input-group">
+			<div className="row">
+				<div className="col-xs-2"></div>
+				<div className="col-xs-8">
+					<input id="loginUsername" className="form-control" placeholder="Username"></input>
+				</div>
+				<div className="col-xs-2"></div>
+			</div>
+			<div className="row">
+				<div className="col-xs-2"></div>
+				<div className="col-xs-8">
+					<input id="loginPassword" className="form-control" type="password" placeholder="Password"></input>
+				</div>
+				<div className="col-xs-2"></div>
+			</div>
+			<div className="row">
+				<div className="col-xs-1"></div>
+				<div className="col-xs-5">
+					<button type="button" className="btn" >Register</button>
+					<div id="signUpPopup" className="modal">
+							<div className="modal-content input-group">
+								<span className="close">&times;</span>
+								<p className="myClass">SignUp Information</p>
+								<input type="text" className="form-control" name="user" id="username" placeholder="username"></input>
+								<input type="password" className="form-control" name="password" id="password" placeholder="password" ></input>
+								<input type="text" className="form-control" name="phone" id="phone" placeholder="phone" ></input>
+								<button type="button" className="btn">Save</button>
+							</div>
+					</div>
+
+				</div>
+				<div className="col-xs-5">
+					<button type="button" className="btn" onClick={() => signInClick()} >Sign In</button>
+				</div>
+				<div className="col-xs-1"></div>
+			</div>
+			<div className="row">
+				<div className="col-xs-3"></div>
+				<div className="col-xs-6">
+					<a className="label label-default" onClick={() => notNowClick()}>Not now</a>
+				</div>
+				<div className="col-xs-3"></div>
+			</div>
+			<div className="row"></div>
+		</div>
+		<div className="container">
+			 <div className="row">
+				 <div className="col-xs-2"></div>
+				 <div className="col-xs-4">
+					 <img id="FbButton" src="img/icons/facebook.png" ></img>
+				 </div>
+				 <div className="col-xs-4">
+					 <img id="GoogleButton" src="img/icons/googlePlus.png" ></img>
+				 </div>
+				 <div className="col-xs-2"></div>
+			</div>
+		</div>
+		</div>
+	);
+}
+}
+function notNowClick(){
+	var data = globalData;
+	data[0].CurrentPage = "all";
+	var appState = new State(data, handler);
+	window.appState = appState;
+	render(appState);
+}
+
+function signInClick() {
+
+   console.log("click pe sign in");
+}
+
 class AllRestaurants extends React.Component{
 		render() {
 			var list = this.props.restaurants;
@@ -222,6 +311,12 @@ var DisplayTable = React.createClass({
 						<AllRestaurants restaurants={state.getState()[0].Restaurants} filtered={state.getState()[0].Filtered} state={state}/>
 					</div>
 				;
+			}else if(currentPage=== "login"){
+				app=
+					<div>
+						<LoginPage/>
+					</div>
+				;
 			}else{
 				app=
 					<div>
@@ -303,10 +398,15 @@ var DisplayTable = React.createClass({
 	}
 
 	Model.getRestaurants().then(function(data){
+		if(globalData){
+
+		} else{
 		globalData = data;
+
     data[0].CurrentRestaurant = "1";
-		data[0].CurrentPage = "all";
+		data[0].CurrentPage = "login";
     var appState = new State(data, handler);
   	window.appState = appState;
   	render(appState);
+	}
   });
