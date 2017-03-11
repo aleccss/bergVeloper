@@ -17,6 +17,7 @@
  * under the License.
  */
 var restaurants;
+var users;
 var app = {
     // Application Constructor
     initialize: function() {
