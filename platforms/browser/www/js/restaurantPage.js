@@ -56,7 +56,7 @@ class LoginPage extends React.Component{
 			<div className="row">
 				<div className="col-xs-3"></div>
 				<div className="col-xs-6">
-					<a className="label label-default" className="notNowButton" onClick={() => notNowClick()}>Not now</a>
+					<a className="label label-default" className="notNowButton" onClick={() => goToAllPage()}>Not now</a>
 				</div>
 				<div className="col-xs-3"></div>
 			</div>
@@ -78,7 +78,7 @@ class LoginPage extends React.Component{
 	);
 }
 }
-function notNowClick(){
+function goToAllPage(){
 	globalData = Session.restaurants;
 	var data = globalData;
 	data[0].CurrentPage = "all";
@@ -88,8 +88,17 @@ function notNowClick(){
 }
 
 function signInClick() {
-
-   console.log("click pe sign in");
+	 users = Session.users;
+	 var username = document.getElementById("loginUsername").value;
+   var password = document.getElementById("loginPassword").value;
+   for(var i in users){
+      if((users[i].username === username) && (users[i].password === password)){
+         console.log("success");
+         goToAllPage();
+				 break;
+      }
+   }
+   console.log("invalidUser");
 }
 
 class AllRestaurants extends React.Component{
@@ -398,7 +407,6 @@ var DisplayTable = React.createClass({
 		state = currentPageHandler(state,action);
 		return state;
 	}
-
 
 	var data = [];
 	data.push({CurrentPage : "login"});
