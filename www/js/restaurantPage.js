@@ -1,6 +1,7 @@
 
 var globalData;
 var users;
+var previousState;
 
 class LoginPage extends React.Component{
 	render() {
@@ -56,7 +57,7 @@ class LoginPage extends React.Component{
 			<div className="row">
 				<div className="col-xs-3"></div>
 				<div className="col-xs-6">
-					<a className="label label-default" className="notNowButton" onClick={() => goToAllPage()}>Not now</a>
+					<a className="btn btn-default notNowButton" onClick={() => goToAllPage()}>Not now</a>
 				</div>
 				<div className="col-xs-3"></div>
 			</div>
@@ -108,25 +109,18 @@ class AllRestaurants extends React.Component{
 			var state = this.props.state.getState();
 			return (
 				<div className="container">
+					<div className="row" style={{ height : "60px"}}>
+					</div>
 					<div className="row">
-						<div>
-						 <div className="container">
-							<div className="row" >
-							</div>
-							<div className="row h">
-								<div className="col-xs-12 logo-container">
-									<img className="logo" src="logo2.jpg"></img>
-								</div>
-							</div>
+						<div className="col-md-12">
+							<img src="img/logo.jpg" className="logo"/>
 						</div>
-						<div className="container">
-							<div className="row">
-								<div className="search">
-									<InstantBox data={list}/>
-								</div>
-
-							</div>
-						</div>
+					</div>
+					<div className="row" style={{height : "40px"}}>
+					</div>
+					<div className="row">
+						<div className="search">
+							<InstantBox data={list}/>
 						</div>
 					</div>
 				</div>
@@ -140,11 +134,13 @@ class AllRestaurants extends React.Component{
 			var imageSrc = this.props.picture;
 			return (
 				<div className="container">
-					<div className="row">
-						<div id="picture" className="col-xs-3" style={{ display : "block" }}>
-							<img src={imageSrc} />
+					<div className="row margin-top-20px">
+						<div id="picture" className="col-xs-4" style={{ display : "block" }}>
+							<img src={imageSrc} style={{ width : "100%" }} />
 						</div>
-						<h3><div id="name" className="col-xs-9">{name}</div></h3>
+						<div id="name" className="col-xs-8">
+							<h4>{name}</h4>
+						</div>
 					</div>
 				</div>
 			);
@@ -158,20 +154,21 @@ class AllRestaurants extends React.Component{
 		var tables = this.props.tables;
 			return (
 				<div className="container">
-					<div className="row">
-						<div className="bs-example col-xs-12">
+					<div className="row margin-top-20px">
+						<div className="col-xs-12">
 							<ul className="nav nav-tabs" id="myTab">
-								<li><a data-toggle="tab" href="#aboutTab">About</a></li>
+								<li className="active"><a data-toggle="tab" href="#aboutTab">About</a></li>
 								<li><a data-toggle="tab" href="#menuTab">Menu</a></li>
 								<li><a data-toggle="tab" href="#bookingsTab">Bookings</a></li>
 							</ul>
-							<div className="tab-content">
+							<div className="tab-content margin-top-10px">
 								<div id="aboutTab" className="tab-pane fade in active">
 									 <div>
 										{about.map(function(item,index){
 											return <p key={ index } >{item}</p>;
 										})}
 									</div>
+									<button className="btn central-content" onClick={() => onBack()}>___________</button>
 								</div>
 								<div id="menuTab" className="tab-pane fade">
 									 <div>
@@ -179,6 +176,7 @@ class AllRestaurants extends React.Component{
 											return <p key={ index }>{item}</p>;
 										})}
 									</div>
+									<button className="btn central-content" onClick={() => onBack()}>___________</button>
 								</div>
 								<div id="bookingsTab" className="tab-pane fade">
 									 <input className="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
@@ -192,6 +190,7 @@ class AllRestaurants extends React.Component{
 											}
 										})}
 										</div>
+										<button className="btn central-content" onClick={() => onBack()}>___________</button>
 									 </div>
 								</div>
 								<br />
@@ -226,7 +225,7 @@ class AllRestaurants extends React.Component{
     },
     render:function(){
         return (
-            <div className="InstantBox">
+            <div className="InstantBox central-content">
                 <SearchBox query={this.state.query} doSearch={this.doSearch}/>
                 <DisplayTable data={this.state.filteredData}/>
             </div>
@@ -240,7 +239,7 @@ var SearchBox = React.createClass({
         this.props.doSearch(query);
     },
     render:function(){
-        return <input className="searchbar-edit" type="text" ref="searchInput" placeholder="Search Restaurant" value={this.props.query} onChange={this.doSearch}/>
+        return <input className="form-control" type="text" ref="searchInput" placeholder="Search Restaurant" value={this.props.query} onChange={this.doSearch}/>
     }
 });
 
@@ -263,27 +262,18 @@ var DisplayTable = React.createClass({
     render:function(){
         var rows=[];
         this.props.data.forEach(function(item,index) {
-        rows.push(<tr key={ index }  onClick={() => displayRestaurant(item.Id)}><td>
-						<div className="container">
-							<div className="row">
-								<div className="col-xs-12 restaurant">
-									<div className="col-xs-2 dot"></div>
-									<div className="col-xs-4">
-										<p>{item.Name}</p>
-									</div>
-									<div className="col-xs-4 rating">
-
-										<p>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</p>
-									</div>
-								</div>
-							</div>
-						</div>
-				</td></tr>)
+        rows.push(
+						<li className="list-group-item" onClick={() => displayRestaurant(item.Id)} id={index}>
+							 <h4>{item.Name}</h4>
+							 <p>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</p>
+						</li>)
         });
         return(
-             <table>
-                <tbody>{rows}</tbody>
-            </table>
+             <ul className="list-group margin-top-20px">
+                {rows}
+								<button className="btn central-content" onClick={() => onBack()}>___________</button>
+            </ul>
+
         );
     }
 });
@@ -408,8 +398,15 @@ var DisplayTable = React.createClass({
 		return state;
 	}
 
+	function onBack(){
+		var appState = previousState;
+		window.appState = appState;
+		render(appState)
+	}
+
 	var data = [];
 	data.push({CurrentPage : "login"});
   var appState = new State(data, handler);
+	previousState = appState;
   window.appState = appState;
   render(appState);
