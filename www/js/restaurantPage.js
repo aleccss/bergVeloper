@@ -3,6 +3,7 @@ var globalData;
 var users;
 var previousState;
 
+//import { LoginPage } from './react/LoginPage.jsx';
 class LoginPage extends React.Component{
 	render() {
 		return (
@@ -22,7 +23,7 @@ class LoginPage extends React.Component{
 			<div className="row">
 				<div className="col-xs-2"></div>
 				<div className="col-xs-8"  style={{margin:"5px"}}>
-					<input id="loginUsername" className="form-control" placeholder="Username"></input>
+					<input id="loginUsername" className="form-control" type="text" placeholder="Username" style={{position:"initial"}}></input>
 				</div>
 				<div className="col-xs-2"></div>
 			</div>
@@ -33,18 +34,18 @@ class LoginPage extends React.Component{
 				</div>
 				<div className="col-xs-2"></div>
 			</div>
-			<div className="row" style={{margin: "10px"}}>
+			<div className="row">
 				<div className="col-xs-1"></div>
 				<div className="col-xs-5">
-					<button type="button" className="btn signUpButton" >Register</button>
+					<button type="button" className="btn signUpButton" onClick={ () => registerClick() }>Register</button>
 					<div id="signUpPopup" className="modal">
 							<div className="modal-content input-group">
-								<span className="close">&times;</span>
+								<span className="close" onClick={ () => spanClick() }>&times;</span>
 								<p className="myClass">SignUp Information</p>
 								<input type="text" className="form-control" name="user" id="username" placeholder="username" style={{margin:"5px"}}></input>
 								<input type="password" className="form-control" name="password" id="password" placeholder="password" style={{margin:"5px"}}></input>
 								<input type="text" className="form-control" name="phone" id="phone" placeholder="phone" style={{margin:"5px"}}></input>
-								<button type="button" className="btn" className="saveUser">Save</button>
+								<button type="button" className="btn saveUser" onClick={ () => saveUser() }>Save</button>
 							</div>
 					</div>
 
@@ -76,9 +77,9 @@ class LoginPage extends React.Component{
 			</div>
 		</div>
 		</div>
-	);
+	);}
 }
-}
+
 function goToAllPage(){
 	globalData = Session.restaurants;
 	var data = globalData;
@@ -88,18 +89,57 @@ function goToAllPage(){
 	render(appState);
 }
 
+window.onclick = function(event) {
+	var signUpPopup = document.getElementById("signUpPopup");
+  if(event.target == signUpPopup) {
+    signUpPopup.style.display = "none";
+  }
+}
+
+function registerClick() {
+	var signUpPopup = document.getElementById("signUpPopup");
+	signUpPopup.style.display = "block";
+}
+
+function spanClick() {
+	var signUpPopup = document.getElementById("signUpPopup");
+  signUpPopup.style.display = "none";
+};
+
+function saveUser() {
+	users = Session.users;
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var phone = document.getElementById("phone").value;
+  if(username !== "" && password !== "" && phone !== ""){
+		var lastId = parseInt(users[users.length-1]._id);
+    var id = lastId + 1;
+    var user = {
+      '_id' : id.toString(),
+      'username' : username,
+      'password' : password,
+      'phone' : phone,
+      'bookings' : []
+    }
+    Model.saveUser(user);
+  }
+	users.push(user);
+  console.log(username + "|" + password + "|" + phone);
+};
+
 function signInClick() {
 	 users = Session.users;
 	 var username = document.getElementById("loginUsername").value;
    var password = document.getElementById("loginPassword").value;
-   for(var i in users){
-      if((users[i].username === username) && (users[i].password === password)){
-         console.log("success");
-         goToAllPage();
-				 break;
-      }
-   }
-   console.log("invalidUser");
+	 var existUser = users.some(function(user){
+		 return (user.username === username) && (user.password === password);
+	 });
+   if(existUser){
+		 console.log("success");
+		 goToAllPage();
+	 }else{
+     console.log("invalidUser");
+ 	 }
 }
 
 class AllRestaurants extends React.Component{
@@ -263,7 +303,7 @@ var DisplayTable = React.createClass({
         var rows=[];
         this.props.data.forEach(function(item,index) {
         rows.push(
-						<li className="list-group-item" onClick={() => displayRestaurant(item.Id)} id={index}>
+						<li className="list-group-item" onClick={() => displayRestaurant(item.Id)} key={index}>
 							 <h4>{item.Name}</h4>
 							 <p>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</p>
 						</li>)
@@ -401,7 +441,7 @@ var DisplayTable = React.createClass({
 	function onBack(){
 		var appState = previousState;
 		window.appState = appState;
-		render(appState)
+		render(appState);
 	}
 
 	var data = [];

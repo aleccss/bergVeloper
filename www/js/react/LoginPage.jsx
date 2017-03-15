@@ -1,4 +1,4 @@
-class LoginPage extends React.Component{
+export class LoginPage extends React.Component{
 	render() {
 		return (
 			<div>
@@ -52,7 +52,7 @@ class LoginPage extends React.Component{
 			<div className="row">
 				<div className="col-xs-3"></div>
 				<div className="col-xs-6">
-					<a className="label label-default" className="notNowButton" onClick={() => goToAllPage()}>Not now</a>
+					<a className="btn btn-default notNowButton" onClick={() => goToAllPage()}>Not now</a>
 				</div>
 				<div className="col-xs-3"></div>
 			</div>
