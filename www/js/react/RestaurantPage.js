@@ -12,7 +12,7 @@ class AllRestaurants extends React.Component{
 							</div>
 							<div className="row h">
 								<div className="col-xs-12 logo-container">
-									<img className="logo" src="logo2.jpg"></img>
+									<img className="logo" src="img/logo.jpg"></img>
 								</div>
 							</div>
 						</div>
@@ -83,9 +83,9 @@ class AllRestaurants extends React.Component{
 										<div className="column" className="tablesLayout">
 											{tables.map(function(item,index){
 											if(item.Status==="1"){
-												return <img src="table.jpg" key={ index }></img>;
+												return <img src="img/table.jpg" key={ index }></img>;
 											}else{
-												return <img src="table1.jpg" key={ index }></img>;
+												return <img src="img/table1.jpg" key={ index }></img>;
 											}
 										})}
 										</div>
