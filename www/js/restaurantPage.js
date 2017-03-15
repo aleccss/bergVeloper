@@ -1,146 +1,5 @@
 
-var globalData;
-var users;
 var previousState;
-
-//import { LoginPage } from './react/LoginPage.jsx';
-class LoginPage extends React.Component{
-	render() {
-		return (
-			<div>
-			<div className="container">
-				<div className="row" style={{ height : "60px"}}>
-				</div>
-			<div className="row">
-				<div className="col-md-12">
-					<img src="img/logo.jpg" className="logo"/>
-				</div>
-			</div>
-			<div className="row" style={{height : "40px"}}>
-			</div>
-		</div>
-		<div className="container input-group">
-			<div className="row">
-				<div className="col-xs-2"></div>
-				<div className="col-xs-8"  style={{margin:"5px"}}>
-					<input id="loginUsername" className="form-control" type="text" placeholder="Username" style={{position:"initial"}}></input>
-				</div>
-				<div className="col-xs-2"></div>
-			</div>
-			<div className="row">
-				<div className="col-xs-2"></div>
-				<div className="col-xs-8" style={{margin:"5px"}}>
-					<input id="loginPassword" className="form-control" type="password" placeholder="Password" style={{position:"initial"}}></input>
-				</div>
-				<div className="col-xs-2"></div>
-			</div>
-			<div className="row">
-				<div className="col-xs-1"></div>
-				<div className="col-xs-5">
-					<button type="button" className="btn signUpButton" onClick={ () => registerClick() }>Register</button>
-					<div id="signUpPopup" className="modal">
-							<div className="modal-content input-group">
-								<span className="close" onClick={ () => spanClick() }>&times;</span>
-								<p className="myClass">SignUp Information</p>
-								<input type="text" className="form-control" name="user" id="username" placeholder="username" style={{margin:"5px"}}></input>
-								<input type="password" className="form-control" name="password" id="password" placeholder="password" style={{margin:"5px"}}></input>
-								<input type="text" className="form-control" name="phone" id="phone" placeholder="phone" style={{margin:"5px"}}></input>
-								<button type="button" className="btn saveUser" onClick={ () => saveUser() }>Save</button>
-							</div>
-					</div>
-
-				</div>
-				<div className="col-xs-5">
-					<button type="button" className="btn signInButton" onClick={() => signInClick()} >Sign In</button>
-				</div>
-				<div className="col-xs-1"></div>
-			</div>
-			<div className="row">
-				<div className="col-xs-3"></div>
-				<div className="col-xs-6">
-					<a className="btn btn-default notNowButton" onClick={() => goToAllPage()}>Not now</a>
-				</div>
-				<div className="col-xs-3"></div>
-			</div>
-			<div className="row" style={{height : "40px"}}></div>
-		</div>
-		<div className="container">
-			 <div className="row">
-				 <div className="col-xs-2"></div>
-				 <div className="col-xs-4">
-					 <img id="FbButton" className="fgButtons" src="img/icons/facebook.png" ></img>
-				 </div>
-				 <div className="col-xs-4">
-					 <img id="GoogleButton" className="fgButtons"src="img/icons/googlePlus.png" ></img>
-				 </div>
-				 <div className="col-xs-2"></div>
-			</div>
-		</div>
-		</div>
-	);}
-}
-
-function goToAllPage(){
-	globalData = Session.restaurants;
-	var data = globalData;
-	data[0].CurrentPage = "all";
-	var appState = new State(data, handler);
-	window.appState = appState;
-	render(appState);
-}
-
-window.onclick = function(event) {
-	var signUpPopup = document.getElementById("signUpPopup");
-  if(event.target == signUpPopup) {
-    signUpPopup.style.display = "none";
-  }
-}
-
-function registerClick() {
-	var signUpPopup = document.getElementById("signUpPopup");
-	signUpPopup.style.display = "block";
-}
-
-function spanClick() {
-	var signUpPopup = document.getElementById("signUpPopup");
-  signUpPopup.style.display = "none";
-};
-
-function saveUser() {
-	users = Session.users;
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
-  var phone = document.getElementById("phone").value;
-  if(username !== "" && password !== "" && phone !== ""){
-		var lastId = parseInt(users[users.length-1]._id);
-    var id = lastId + 1;
-    var user = {
-      '_id' : id.toString(),
-      'username' : username,
-      'password' : password,
-      'phone' : phone,
-      'bookings' : []
-    }
-    Model.saveUser(user);
-  }
-	users.push(user);
-  console.log(username + "|" + password + "|" + phone);
-};
-
-function signInClick() {
-	 users = Session.users;
-	 var username = document.getElementById("loginUsername").value;
-   var password = document.getElementById("loginPassword").value;
-	 var existUser = users.some(function(user){
-		 return (user.username === username) && (user.password === password);
-	 });
-   if(existUser){
-		 console.log("success");
-		 goToAllPage();
-	 }else{
-     console.log("invalidUser");
- 	 }
-}
 
 class AllRestaurants extends React.Component{
 		render() {
@@ -318,10 +177,10 @@ var DisplayTable = React.createClass({
     }
 });
 	function displayRestaurant(id){
-		var data = globalData;
+		var data = Session.restaurants;
 		data[0].CurrentRestaurant = id;
 		data[0].CurrentPage = "display";
-		var appState = new State(data, handler);
+		var appState = new window.State(data, window.handler);
   	window.appState = appState;
   	render(appState);
 	}
@@ -353,11 +212,7 @@ var DisplayTable = React.createClass({
 					</div>
 				;
 			}else if(currentPage=== "login"){
-				app=
-					<div>
-						<LoginPage/>
-					</div>
-				;
+				app = React.createElement(LoginPage);
 			}else{
 				app=
 					<div>
@@ -386,57 +241,58 @@ var DisplayTable = React.createClass({
 		}
 	}
 
-	function render(state){
+window.render = function(state){
 		ReactDOM.render(<App state={state}/>, document.getElementById("reactApp"));
 	}
 
 
-	function State(initialState, handler){
-		var s = {};
+window.State = function(initialState, handler){
+	var s = {};
 
-		function dispatch(action){
-			initialState = handler(initialState, action);
-			render(this);
-		}
-
-		function getState(){
-			return initialState;
-		}
-
-		s.dispatch = dispatch.bind(s);
-		s.getState = getState.bind(s);
-
-		return s;
+	function dispatch(action){
+		initialState = handler(initialState, action);
+		render(this);
 	}
 
-
-
-	function currentRestaurantHandler(state, action){
-		if(action.Type === "changeRestaurant"){
-			return {
-				...state,
-				CurrentRestaurant : action.Payload
-			};
-		}
-		return state;
+	function getState(){
+		return initialState;
 	}
 
-	function currentPageHandler(state, action){
-		if(action.Type === "changePage"){
-			return {
-				...state,
-				CurrentPage : action.Payload.CurrentPage
-			};
-		}
-		return state;
-	}
+	s.dispatch = dispatch.bind(s);
+	s.getState = getState.bind(s);
+
+	return s;
+}
+
+window.handler = function(state, action){
+	var state = currentRestaurantHandler(state, action);
+	state = currentPageHandler(state,action);
+	return state;
+}
 
 
-	function handler(state, action){
-		var state = currentRestaurantHandler(state, action);
-		state = currentPageHandler(state,action);
-		return state;
+function currentRestaurantHandler(state, action){
+	if(action.Type === "changeRestaurant"){
+		return {
+			...state,
+			CurrentRestaurant : action.Payload
+		};
 	}
+	return state;
+}
+
+function currentPageHandler(state, action){
+	if(action.Type === "changePage"){
+		return {
+			...state,
+			CurrentPage : action.Payload.CurrentPage
+		};
+	}
+	return state;
+}
+
+
+
 
 	function onBack(){
 		var appState = previousState;
@@ -446,7 +302,7 @@ var DisplayTable = React.createClass({
 
 	var data = [];
 	data.push({CurrentPage : "login"});
-  var appState = new State(data, handler);
+  var appState = new window.State(data, window.handler);
 	previousState = appState;
   window.appState = appState;
   render(appState);
