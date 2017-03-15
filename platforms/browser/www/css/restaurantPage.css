@@ -18,3 +18,42 @@ p {
   width:50px;
   height:50px;
 }
+.logo{
+  width: 120px;
+  height: 120px;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+}
+.signUpButton{
+  background-color: black;
+  color: white;
+  width:100px;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.saveUser{
+  margin: 5px;
+  width:100%;
+}
+.signInButton{
+  background-color: black;
+  color: white;
+  width:100px;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.notNowButton{
+  display: block;
+  margin-top: 10px;
+}
+.fgButtons{
+  width:70px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
