@@ -16,24 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var restaurants;
 var users;
 var app = {
     // Application Constructor
     initialize: function() {
         // TO-DO - check if there is internet and load data from local
-
         Model.getRestaurants().then(function(data){
           restaurants = data;
           Session.setRestaurants(data);
         });
-        var that = this;
         Model.getUsers().then(function(data){
           users = data;
           Session.setUsers(data);
-          
         });
-        document.addEventListener('deviceready', that.onDeviceReady.bind(this), false);
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
     // deviceready Event Handler
@@ -56,5 +54,4 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
 app.initialize();
