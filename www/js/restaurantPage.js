@@ -3,7 +3,6 @@ var globalData;
 var users;
 var previousState;
 
-//import { LoginPage } from './react/LoginPage.jsx';
 class LoginPage extends React.Component{
 	render() {
 		return (
@@ -227,9 +226,9 @@ class AllRestaurants extends React.Component{
 										<div className="column" className="tablesLayout">
 											{tables.map(function(item,index){
 											if(item.Status==="1"){
-												return <img src="table.jpg" key={ index }></img>;
+												return <img src="img/table.jpg" key={ index }></img>;
 											}else{
-												return <img src="table1.jpg" key={ index }></img>;
+												return <img src="img/table1.jpg" key={ index }></img>;
 											}
 										})}
 										</div>
