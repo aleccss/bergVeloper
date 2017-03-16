@@ -76,6 +76,9 @@ class LoginPage extends React.Component{
 				 <div className="col-xs-2"></div>
 			</div>
 		</div>
+		<div className="alertlogin alert alert-danger" id="alertErrorLogin" style={{display : "none"}}>
+    	<strong>Error!</strong> Incorect Username or Password.
+  	</div>
 		</div>
 	);}
 }
@@ -138,7 +141,7 @@ function signInClick() {
 		 console.log("success");
 		 goToAllPage();
 	 }else{
-     console.log("invalidUser");
+		 $("#alertErrorLogin").show().delay(2000);
  	 }
 }
 
@@ -349,6 +352,9 @@ var DisplayTable = React.createClass({
 			if(currentPage === "all"){
 				app=
 					<div>
+						<a href="#">
+          		<span className="glyphicon glyphicon-arrow-left"></span>
+        		</a>
 						<AllRestaurants restaurants={state.getState()[0].Restaurants} filtered={state.getState()[0].Filtered} state={state}/>
 					</div>
 				;

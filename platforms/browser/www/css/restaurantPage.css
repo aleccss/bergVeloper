@@ -57,3 +57,20 @@ p {
   margin-right: auto;
   display: block;
 }
+.alertlogin{
+  -webkit-animation: fadeinout 7s linear forwards;
+  animation: fadeinout 7s linear forwards;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width:90%;
+}
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
