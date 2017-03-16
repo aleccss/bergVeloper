@@ -19,13 +19,10 @@
 -->
 <html>
 <head>
-  <script type="text/javascript">
-            var timerStart = Date.now();
-        </script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Restaurant Bookings Page</title>
+<title>book'n'eat</title>
 
 <script src="js/imports/react.js"></script>
 <script src="js/imports/react-dom.js"></script>
@@ -35,27 +32,24 @@
 <script type="text/javascript" src="js/imports/bootstrap-datepicker.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/restaurantPage.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/model.js"></script>
-<script type="text/javascript" src="js/session.js"></script>
+<script type="text/javascript" src="js/utils/utils.js"></script>
+<script type="text/javascript" src="js/utils/session.js"></script>
+
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/datePicker.js"></script>
-<script type="text/babel" src="js/restaurantPage.js"></script>
+
+<script type="text/babel" src="js/main.js"></script>
 <script type="text/javascript" src="js/react/LoginPage.js"></script>
+<script type="text/javascript" src="js/react/RestaurantListPage.js"></script>
+<script type="text/javascript" src="js/react/RestaurantPage.js"></script>
+
 </head>
 <body>
 <div id="reactApp">
 </div>
-<script type="text/javascript">
-            $(document).ready(function() {
-                console.log("Time until DOMready: ", Date.now()-timerStart);
-            });
-            $(window).load(function() {
-                console.log("Time until everything loaded: ", Date.now()-timerStart);
-            });
-       </script>
 </body>
 </html>
