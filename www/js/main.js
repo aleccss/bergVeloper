@@ -7,7 +7,7 @@ function findCurrentPage(state){
 																										filtered : state.getState()[0].Filtered,
 																										state : state})
 						);
-		}else if(currentPage=== "login"){
+		}else if(currentPage === "login"){
 			app = React.createElement(LoginPage);
 		}else{
 			app = React.createElement("div", null,

@@ -157,10 +157,15 @@ function signInClick() {
 	 var username = document.getElementById("loginUsername").value;
    var password = document.getElementById("loginPassword").value;
 	 if(username !== "" && password !== ""){
-		 var existUser = users.some(function(user){
-			 return (user.username === username) && (user.password === password);
-		 });
-	   if(existUser){
+		 var loginUser = null;
+		 for(i in users){
+			 if((users[i].username === username) && (users[i].password === password)){
+				 loginUser = users[i];
+				 break;
+			 }
+		 }
+	   if(loginUser){
+			 Session.loggedUser = loginUser;
 			 console.log("success");
 			 goToAllPage();
 		 }else{

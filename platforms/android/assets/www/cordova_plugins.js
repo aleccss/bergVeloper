@@ -180,6 +180,15 @@ module.exports = [
         "clobbers": [
             "CordovaHttpPlugin"
         ]
+    },
+    {
+        "id": "cordova-plugin-datetimepicker.plugin",
+        "file": "plugins/cordova-plugin-datetimepicker/www/plugin.js",
+        "pluginId": "cordova-plugin-datetimepicker",
+        "clobbers": [
+            "DateTimePicker"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -188,7 +197,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.1",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-file": "4.3.1",
-    "cordova-plugin-http": "1.2.0"
+    "cordova-plugin-http": "1.2.0",
+    "cordova-plugin-datetimepicker": "1.0.0"
 };
 // BOTTOM OF METADATA
 });
