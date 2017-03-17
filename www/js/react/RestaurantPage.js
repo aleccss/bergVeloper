@@ -90,11 +90,12 @@ class Tabs extends React.Component{
 																																								onClick : function onClick(tableId) { return tableClick(tableId); }}
 																						)
 																					} else if(tableId === "empty") {
-																						return React.createElement("img", { key : index,
+																						return React.createElement("img", { key : index,																																								
 																																								src : "img/emptyTable.jpg"}
 																						)
 																					} else {
 																						return React.createElement("img", { id : tableId,
+																																								className : "pointer-events-none",
 																																								key : index,
 																																								src : "img/table1.jpg",
 																																								onClick : function onClick(tableId) { return tableClick(tableId); }}
