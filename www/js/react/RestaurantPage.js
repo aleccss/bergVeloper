@@ -78,11 +78,17 @@ class Tabs extends React.Component{
 																									 	 onChange : function onChange() { return timeChanged(); }})
 										)
 									),
-
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
 										React.createElement("button",	{ className: "btn btn-warning central-content", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+										React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________"),
+										React.createElement("div", {className : "alert alert-danger", id:"noTableSelected", style : {display : "none"}},
+							 	 		 React.createElement("strong", null, "Error! "),
+							 			 "No table selected."
+							 		 ),React.createElement("div", {className : "alert alert-danger", id:"noDateTime", style : {display : "none"}},
+										React.createElement("strong", null, "Error! "),
+										"No date/time selected."
+									)
 									)
 								)
 							)
@@ -200,13 +206,13 @@ function timeChanged(){
 }
 
 function bookPressed(){
-	if(!this.date || !this.time){
-		console.log("Please select date/time");
+	if(!this.date.value || !this.time.value){
+		Utils.showAndHideError("noDateTime");
 		return;
 	}
 	var selectedTables = getSelectedTables();
 	if(selectedTables.length === 0){
-		console.log("Please select a table");
+		Utils.showAndHideError("noTableSelected");
 		return;
 	}
 	var dateTime = this.date+"T"+this.time;
