@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>book'n'eat</title>
+
+<script src="js/imports/jquery-3.1.1.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+
+</head>
+<body>
+  <div class="input-append">
+     <input type="text" id="t2" value="14:30" class="input-small" readonly="">
+     <button class="btn btn-danger" type="button" id="toggle-btn">
+         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+     </button>
+ </div>
+ <script>
+ $(function(){
+    $('#t2').clockface({
+        format: 'HH:mm',
+        trigger: 'manual'
+    });
+
+    $('#toggle-btn').click(function(e){
+        e.stopPropagation();
+        $('#t2').clockface('toggle');
+    });
+});</script>
+<link rel="stylesheet" href="css/clockface.css">
+        <script src="js/clockface.js"></script>
+</div>
+</body>
+</html>

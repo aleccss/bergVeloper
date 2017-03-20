@@ -1,111 +1,231 @@
-class AllRestaurants extends React.Component{
-		render() {
-			var list = this.props.restaurants;
-			var filtered = this.props.filtered;
-			var state = this.props.state.getState();
-			return (
-				<div className="container">
-					<div className="row">
-						<div>
-						 <div className="container">
-							<div className="row" >
-							</div>
-							<div className="row h">
-								<div className="col-xs-12 logo-container">
-									<img className="logo" src="logo2.jpg"></img>
-								</div>
-							</div>
-						</div>
-						<div className="container">
-							<div className="row">
-								<div className="search">
-									<InstantBox data={list}/>
-								</div>
+class Header extends React.Component{
+	render() {
+		var name = this.props.name;
+		var imageSrc = this.props.picture;
+		return (
+			React.createElement("div", {className : "container"},
+				React.createElement("div", {className : "row"},
+					React.createElement("div", { className : "col-xs-3",
+																		   id : "picture",
+																		   style : {display : "block"}},
+						React.createElement("img", {src : imageSrc})
+					),
+					React.createElement("div", { className : "col-xs-9",
+																			 id : "name"},
+						React.createElement("h3", null, name)
+					)
+				)
+		  )
+		)
+	};
+}
 
-							</div>
-						</div>
-						</div>
-					</div>
-				</div>
-			);
+class Tabs extends React.Component{
+	render() {
+	var about = parseProp(this.props.about);
+	var menu = parseProp(this.props.menu);
+	var tables = this.props.tables;
+	var classDisabled = "";
+		if(!Session.loggedUser){
+			classDisabled = " disabled";
 		}
-	}
+		return (
+			React.createElement("div", {className : "container"},
+			  React.createElement("div", {className : "row margin-top-20px"},
+					React.createElement("div", {className : "col-xs-12"},
+						React.createElement("ul", {className : "nav nav-tabs", id : "myTab"},
+							React.createElement("li", {className : "active"},
+								React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
+							),
+							React.createElement("li", null,
+								React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
+							),
+							React.createElement("li", null,
+								React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+							)
+						),
+						React.createElement("div", {className : "tab-content"},
+							React.createElement("div", {className : "tab-pane fade in active", id : "aboutTab"},
+								React.createElement("div", null, about.map(function(item, index){
+																								   return React.createElement("p", {key : index}, item)
+																								 })
+								),
+								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+							),
+							React.createElement("div", {className : "tab-pane fade", id : "menuTab"},
+								React.createElement("div", null, menu.map(function(item, index){
+																									 return React.createElement("p", {key : index}, item);
+																								 })
+								),
+								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+							),
+							React.createElement("div", {className : "tab-pane fade", id : "bookingsTab"},
+								React.createElement("div", {className : "container" + classDisabled },
+									React.createElement("div", {className : "row"},
+										React.createElement("div", {className : "col-xs-7"},
+											React.createElement("input", { className : "form-control",
+																										 id : "date",
+																									   name : "date",
+																									   placeholder : "Select Date",
+																									   type : "date"})
+										),
+										React.createElement("div", {className : "col-xs-5"},
+									 		React.createElement("input", { className : "form-control",
+																									 	 id : "time",
+																								   	 name : "time",
+																								   	 placeholder : "Select Time",
+																								   	 type : "time",
+																									 	 onChange : function onChange() { return timeChanged(); }})
+										)
+									),
 
-	class Header extends React.Component{
-		render() {
-			var name = this.props.name;
-			var imageSrc = this.props.picture;
-			return (
-				<div className="container">
-					<div className="row">
-						<div id="picture" className="col-xs-3" style={{ display : "block" }}>
-							<img src={imageSrc} />
-						</div>
-						<h3><div id="name" className="col-xs-9">{name}</div></h3>
-					</div>
-				</div>
-			);
-		}
-	}
+									React.createElement("div", { className : "row"},
+										React.createElement(DisplayTables, { tables : tables }),
+										React.createElement("button",	{ className: "btn btn-warning central-content", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
+										React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+									)
+								)
+							)
+						)
+					)
+				)
+			)
+		);
+	};
+}
 
-	class Tabs extends React.Component{
-		render() {
-		var about = parseProp(this.props.about);
-		var menu = parseProp(this.props.menu);
+class DisplayTables extends React.Component{
+	render(){
 		var tables = this.props.tables;
-			return (
-				<div className="container">
-					<div className="row">
-						<div className="bs-example col-xs-12">
-							<ul className="nav nav-tabs" id="myTab">
-								<li><a data-toggle="tab" href="#aboutTab">About</a></li>
-								<li><a data-toggle="tab" href="#menuTab">Menu</a></li>
-								<li><a data-toggle="tab" href="#bookingsTab">Bookings</a></li>
-							</ul>
-							<div className="tab-content">
-								<div id="aboutTab" className="tab-pane fade in active">
-									 <div>
-										{about.map(function(item,index){
-											return <p key={ index } >{item}</p>;
-										})}
-									</div>
-								</div>
-								<div id="menuTab" className="tab-pane fade">
-									 <div>
-										{menu.map(function(item,index){
-											return <p key={ index }>{item}</p>;
-										})}
-									</div>
-								</div>
-								<div id="bookingsTab" className="tab-pane fade">
-									 <input className="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-									 <div id="tables">
-										<div className="column" className="tablesLayout">
-											{tables.map(function(item,index){
-											if(item.Status==="1"){
-												return <img src="table.jpg" key={ index }></img>;
-											}else{
-												return <img src="table1.jpg" key={ index }></img>;
-											}
-										})}
-										</div>
-									 </div>
-								</div>
-								<br />
-							</div>
-						</div>
-					</div>
-				</div>
-			);
-		}
-	}
+		return React.createElement("div", { id : "tables", className : "column tablesLayout col-xs-12"},
+												tables.map(function(item, index){
+													var tableId = item.Id;
+													if(tableId === "empty") {
+														return React.createElement("img", { key : index,
+																																src : "img/emptyTable.jpg"}
+														)
+													} else if(item.Status === "1") {
+														return React.createElement("img", { id : tableId,
+																																key : index,
+																																src : "img/table.jpg",
+																																onClick : function onClick(tableId) { return tableClick(tableId); }}
+														)
+													} else {
+														return React.createElement("img", { id : tableId,
+																																className : "pointer-events-none",
+																																key : index,
+																																src : "img/table1.jpg",
+																																onClick : function onClick(tableId) { return tableClick(tableId); }}
+														)
+													}
+												})
+		);
+	};
+}
 
-	class DisplayRestaurant extends React.Component{
-		render(){
-			var currentRestaurant = findRestaurant(this.props.state.getState());
-			return <div>
-								<Header name={currentRestaurant.Name}  picture={currentRestaurant.Picture}/>
-								<Tabs about={currentRestaurant.About} menu={currentRestaurant.Menu} tables={currentRestaurant.Tables}/>
-							</div>
+class DisplayRestaurant extends React.Component{
+	render(){
+		var currentRestaurant = findRestaurant(this.props.state.getState());
+		return React.createElement("div",	null,
+				React.createElement(Header, { name: currentRestaurant.Name, picture: currentRestaurant.Picture }),
+				React.createElement(Tabs, { about: currentRestaurant.About, menu: currentRestaurant.Menu, tables: currentRestaurant.Tables })
+			);
+	}
+}
+
+function parseProp(prop){
+	var results = [];
+	var array = prop.split(";");
+	return array;
+}
+
+function findRestaurant(state){
+	var array = Session.restaurants[0].Restaurants;
+	var id = Session.restaurants[0].CurrentRestaurant;
+	return array.find((item) => item.Id === id );
+}
+
+function tableClick(input){
+	var tableId = input.currentTarget.id;
+	if (document.getElementById(tableId).className === "tableSelected") {
+		document.getElementById(tableId).className = "";
+	} else {
+		document.getElementById(tableId).className = "tableSelected";
+	}
+}
+
+function timeChanged(){
+	this.date = document.getElementById("date").value;
+	this.time = document.getElementById("time").value;
+
+	var restaurants = Session.restaurants[0].Restaurants;
+	var currentRestaurantId = Session.restaurants[0].CurrentRestaurant;
+	var currentRestaurant = restaurants.find((item) => item.Id === currentRestaurantId );
+  var bookings = currentRestaurant.Bookings;
+
+	var date = this.date + "T" + this.time;
+	var selectedDate = new Date(date);
+	var dateIntervalEnd = Utils.addHours(date, 2);
+  var bookedFlag = false;
+	bookings.map(function(booking){
+		var bookingDate = new Date(booking.dateTime);
+		if(selectedDate > bookingDate && bookingDate < dateIntervalEnd){
+			bookedFlag = true;
+			var reservedTables = booking.tableIds;
+			currentRestaurant.Tables.forEach(function(table){
+				booking.tableIds.forEach(function(reservedTable){
+					if(table.Id !== "empty"){
+						if(table.Id === reservedTable){
+							table.Status = "2";
+							document.getElementById(table.Id).src = "img/table1.jpg";
+						} else {
+							table.Status = "1";
+							document.getElementById(table.Id).src = "img/table.jpg";
+						}
+					}
+				});
+			});
+		} else {
+			if(!bookedFlag){
+			currentRestaurant.Tables.filter(function(table){
+				return table.Id !== "empty";
+			}).map(function(table){
+				table.Status = "1";
+				document.getElementById(table.Id).src = "img/table.jpg";
+			});
+			}
+		}
+	});
+	console.log("Selected Time: ",date," ",time);
+}
+
+function bookPressed(){
+	if(!this.date || !this.time){
+		console.log("Please select date/time");
+		return;
+	}
+	var selectedTables = getSelectedTables();
+	if(selectedTables.length === 0){
+		console.log("Please select a table");
+		return;
+	}
+	var dateTime = this.date+"T"+this.time;
+	var selectedDate = new Date(dateTime);
+	var booking = { userId : Session.loggedUser._id,
+									restaurantId : Session.restaurants[0].CurrentRestaurant,
+									tableIds : selectedTables,
+									dateTime : selectedDate
+								};
+	Model.processBooking(booking);
+}
+
+function getSelectedTables(){
+	var tables = document.getElementById("tables").children;
+	var selectedTables = [];
+	for(var i = 0; i < tables.length; i++){
+		if(tables[i].className === "tableSelected"){
+			selectedTables.push(tables[i].id);
 		}
 	}
+	return selectedTables;
+}
