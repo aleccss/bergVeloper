@@ -43,6 +43,12 @@ var Utils = {
     var appState = Session.previousState;
     Session.appState = appState;
     render(appState);
+  },
+  showAndHideError : function(id) {
+    $("#"+id).show();
+    setTimeout(function () {
+       $("#" + id).hide();
+     }, 2000);
   }
 
 }
