@@ -12,9 +12,6 @@
         },
         "cordova-plugin-http": {
             "PACKAGE_NAME": "com.bergveloper.bookneat"
-        },
-        "cordova-plugin-datetimepicker": {
-            "PACKAGE_NAME": "com.bergveloper.bookneat"
         }
     },
     "dependent_plugins": {

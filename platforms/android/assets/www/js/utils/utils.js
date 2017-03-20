@@ -43,6 +43,16 @@ var Utils = {
     var appState = Session.previousState;
     Session.appState = appState;
     render(appState);
+  },
+  addHours : function(date, h){
+    var result = new Date(date);
+    result.setTime(result.getTime() + (h*60*60*1000));
+    return result;
+  },
+  showAndHideError : function(id) {
+    $("#"+id).show();
+    setTimeout(function () {
+       $("#" + id).hide();
+     }, 2000);
   }
-
-}
+};

@@ -165,8 +165,6 @@ p {
 }
 .tablesLayout{
   border:pink 1px solid;
-  width:200px;
-  height:200px;
 }
 .tableLayout{
   border:pink 1px solid;
@@ -215,4 +213,13 @@ p {
 
 .tableSelected{
   opacity : 0.3;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }

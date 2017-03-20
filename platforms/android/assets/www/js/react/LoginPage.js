@@ -98,11 +98,18 @@ class LoginPage extends React.Component{
 																		  src : "img/icons/googlePlus.png"})
 		   ),
 			 React.createElement("div", {className : "col-xs-2"})
-	 	 )
+	 	 ),
+		 React.createElement("div", {className : "alert alert-danger", id:"errorLogin", style : {display : "none"}},
+	 		 React.createElement("strong", null, "Error! "),
+			 "Invalid UserName or Password."
+		 ),
+		 React.createElement("div", {className : "alert alert-danger", id:"emptyLogin", style : {display : "none"}},
+	 		 React.createElement("strong", null, "Error! "),
+			 "Empty UserName or Password."
+		 )
 		);
 	}
 }
-
 /** ---===== CODE =====--- **/
 
 function goToAllPage(){
@@ -157,16 +164,20 @@ function signInClick() {
 	 var username = document.getElementById("loginUsername").value;
    var password = document.getElementById("loginPassword").value;
 	 if(username !== "" && password !== ""){
-		 var existUser = users.some(function(user){
-			 return (user.username === username) && (user.password === password);
-		 });
-	   if(existUser){
+		 var loginUser = null;
+		 users.map(function(user){
+			 if((user.username === username) && (user.password === password)){
+				 loginUser = user;
+			 }
+		 })
+	   if(loginUser){
+			 Session.loggedUser = loginUser;
 			 console.log("success");
 			 goToAllPage();
 		 }else{
-	     console.log("invalidUser");
+	     Utils.showAndHideError("errorLogin");
 	 	 }
    } else {
-		 console.log("empty user or pass");
+		 	Utils.showAndHideError("emptyLogin");
 	 }
 }
