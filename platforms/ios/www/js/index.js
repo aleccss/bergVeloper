@@ -16,13 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var restaurants;
 var app = {
     // Application Constructor
     initialize: function() {
         // TO-DO - check if there is internet and load data from local
-        Model.getRestaurants().then(function(data){
-          restaurants = data;
+        Model.getUsers().then(function(data){
+          Session.setUsers(data);
+          Model.getRestaurants().then(function(data){
+            Session.setRestaurants(data);
+            Model.getBookings().then(function(data){
+              var bookings = data;
+              var restaurants = Session.restaurants[0].Restaurants;
+              // TO DO - implement logic to calculate bookings
+              bookings.forEach(function(booking){
+                restaurants.forEach(function(restaurant){
+                  if(booking.restaurantId === restaurant.Id){
+                    restaurant.Bookings.push(booking);
+                  }
+                });
+              });
+              Session.setBookings(data);
+            });
+          });
         });
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
@@ -47,5 +62,4 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
 app.initialize();

@@ -29,9 +29,4 @@ window.render = function(state){
 	ReactDOM.render(React.createElement(App, {state: state}), document.getElementById("reactApp"));
 }
 
-var data = [];
-data.push({CurrentPage : "login"});
-var appState = new Utils.State(data, window.handler);
-Session.previousState = appState;
-Session.appState = appState;
-render(appState);
+window.render(Session.appState);

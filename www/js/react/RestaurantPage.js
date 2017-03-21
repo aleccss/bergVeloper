@@ -4,15 +4,15 @@ class Header extends React.Component{
 		var imageSrc = this.props.picture;
 		return (
 			React.createElement("div", {className : "container"},
-				React.createElement("div", {className : "row"},
-					React.createElement("div", { className : "col-xs-3",
+				React.createElement("div", {className : "row margin-top-10px"},
+					React.createElement("div", { className : "col-xs-4",
 																		   id : "picture",
 																		   style : {display : "block"}},
-						React.createElement("img", {src : imageSrc})
+						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
 					),
-					React.createElement("div", { className : "col-xs-9",
+					React.createElement("div", { className : "col-xs-3",
 																			 id : "name"},
-						React.createElement("h3", null, name)
+						React.createElement("h4", null, name)
 					)
 				)
 		  )
@@ -32,83 +32,65 @@ class Tabs extends React.Component{
 		return (
 			React.createElement("div", {className : "container"},
 			  React.createElement("div", {className : "row margin-top-20px"},
-					React.createElement("div", {className : "col-xs-12"},
-						React.createElement("ul", {className : "nav nav-tabs", id : "myTab"},
-							React.createElement("li", {className : "active"},
-								React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
-							),
-							React.createElement("li", null,
-								React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
-							),
-							React.createElement("li", null,
-								React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+					React.createElement("div", {className : "container"},
+					  React.createElement("div", {className : "row"},
+							React.createElement("ul", {className : "ul-navbar nav navbar-nav", id : "myTab"},
+							  React.createElement("li", null,
+								  React.createElement("span",	{ className: "glyphicon glyphicon-chevron-left back-glyphicon", onClick: function onClick() {	return goToAllPage(); } })
+							  ),
+								React.createElement("li", {className : "active"},
+									React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
+								),
+								React.createElement("li", null,
+									React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
+								),
+								React.createElement("li", null,
+									React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+								)
 							)
-						),
-						React.createElement("div", {className : "tab-content"},
+					  ),
+						React.createElement("div", {className : "row tab-content"},
 							React.createElement("div", {className : "tab-pane fade in active", id : "aboutTab"},
-								React.createElement("div", null, about.map(function(item, index){
+								React.createElement("div", {className : "margin-top-10px"}, about.map(function(item, index){
 																								   return React.createElement("p", {key : index}, item)
 																								 })
-								),
-								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+								)
 							),
-							React.createElement("div", {className : "tab-pane fade", id : "menuTab"},
-								React.createElement("div", null, menu.map(function(item, index){
+							React.createElement("div", {className : "row tab-pane fade", id : "menuTab"},
+								React.createElement("div", {className : "margin-top-10px"}, menu.map(function(item, index){
 																									 return React.createElement("p", {key : index}, item);
 																								 })
-								),
-								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+								)
 							),
-							React.createElement("div", {className : "tab-pane fade", id : "bookingsTab"},
+							React.createElement("div", {className : "row tab-pane fade", id : "bookingsTab"},
 								React.createElement("div", {className : "container" + classDisabled },
-									React.createElement("div", {className : "row"},
+									React.createElement("div", {className : "row margin-top-10px"},
 										React.createElement("div", {className : "col-xs-7"},
 											React.createElement("input", { className : "form-control",
 																										 id : "date",
 																									   name : "date",
-																									   placeholder : "Select Date",
-																									   type : "date"})
+																									   placeholder : "Date",
+																									   type : "text",
+																										 onFocus : function onFocus() { document.getElementById("date").type = 'date'; },
+																									   onChange : function onChange() { return timeChanged(); }})
 										),
 										React.createElement("div", {className : "col-xs-5"},
 									 		React.createElement("input", { className : "form-control",
 																									 	 id : "time",
 																								   	 name : "time",
-																								   	 placeholder : "Select Time",
-																								   	 type : "time",
+																								   	 placeholder : "Time",
+																										 type : "text",
+																										 onFocus : function onFocus() { document.getElementById("time").type = 'time'; },
 																									 	 onChange : function onChange() { return timeChanged(); }})
 										)
 									),
-
-									React.createElement("div", { className : "row" },
-										React.createElement("div", { id : "tables", className : "column tablesLayout col-xs-12"},
-																				tables.map(function(item, index){
-																					var tableId = item.Id;
-																					if(item.Status === "1") {
-																						return React.createElement("img", { id : tableId,
-																																								key : index,
-																																								src : "img/table.jpg",
-																																								onClick : function onClick(tableId) { return tableClick(tableId); }}
-																						)
-																					} else if(tableId === "empty") {
-																						return React.createElement("img", { key : index,
-																																								src : "img/emptyTable.jpg"}
-																						)
-																					} else {
-																						return React.createElement("img", { id : tableId,
-																																								className : "pointer-events-none",
-																																								key : index,
-																																								src : "img/table1.jpg",
-																																								onClick : function onClick(tableId) { return tableClick(tableId); }}
-																						)
-																					}
-																				})
-										),
-										React.createElement("button",	{ className: "btn btn-warning central-content", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________"),
-										React.createElement("div", {className : "alert alert-danger", id:"noTableSelected", style : {display : "none"}},
+									React.createElement("div", { className : "row"},
+										React.createElement(DisplayTables, { tables : tables }),
+										React.createElement("button",	{ className: "btn btn-warning central-content margin-top-10px", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
+										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
 							 	 		 React.createElement("strong", null, "Error! "),
 							 			 "No table selected."
-							 		 ),React.createElement("div", {className : "alert alert-danger", id:"noDateTime", style : {display : "none"}},
+							 		 ),React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
 										React.createElement("strong", null, "Error! "),
 										"No date/time selected."
 									)
@@ -119,6 +101,35 @@ class Tabs extends React.Component{
 					)
 				)
 			)
+		);
+	};
+}
+
+class DisplayTables extends React.Component{
+	render(){
+		var tables = this.props.tables;
+		return React.createElement("div", { id : "tables", className : "column tablesLayout col-xs-12"},
+												tables.map(function(item, index){
+													var tableId = item.Id;
+													if(tableId === "empty") {
+														return React.createElement("img", { key : index,
+																																src : "img/emptyTable.jpg"}
+														)
+													} else if(item.Status === "1") {
+														return React.createElement("img", { id : tableId,
+																																key : index,
+																																src : "img/table.jpg",
+																																onClick : function onClick(tableId) { return tableClick(tableId); }}
+														)
+													} else {
+														return React.createElement("img", { id : tableId,
+																																className : "pointer-events-none",
+																																key : index,
+																																src : "img/table1.jpg",
+																																onClick : function onClick(tableId) { return tableClick(tableId); }}
+														)
+													}
+												})
 		);
 	};
 }
@@ -140,8 +151,8 @@ function parseProp(prop){
 }
 
 function findRestaurant(state){
-	var array = state[0].Restaurants;
-	var id = state[0].CurrentRestaurant;
+	var array = Session.restaurants[0].Restaurants;
+	var id = Session.restaurants[0].CurrentRestaurant;
 	return array.find((item) => item.Id === id );
 }
 
@@ -158,6 +169,44 @@ function timeChanged(){
 	this.date = document.getElementById("date").value;
 	this.time = document.getElementById("time").value;
 
+	var restaurants = Session.restaurants[0].Restaurants;
+	var currentRestaurantId = Session.restaurants[0].CurrentRestaurant;
+	var currentRestaurant = restaurants.find((item) => item.Id === currentRestaurantId );
+  var bookings = currentRestaurant.Bookings;
+
+	var date = this.date + "T" + this.time;
+	var selectedDate = new Date(date);
+	var dateIntervalEnd = Utils.addHours(date, 2);
+  var bookedFlag = false;
+	bookings.map(function(booking){
+		var bookingDate = new Date(booking.dateTime);
+		if(selectedDate > bookingDate && bookingDate < dateIntervalEnd){
+			bookedFlag = true;
+			var reservedTables = booking.tableIds;
+			currentRestaurant.Tables.forEach(function(table){
+				booking.tableIds.forEach(function(reservedTable){
+					if(table.Id !== "empty"){
+						if(table.Id === reservedTable){
+							table.Status = "2";
+							document.getElementById(table.Id).src = "img/table1.jpg";
+						} else {
+							table.Status = "1";
+							document.getElementById(table.Id).src = "img/table.jpg";
+						}
+					}
+				});
+			});
+		} else {
+			if(!bookedFlag){
+			currentRestaurant.Tables.filter(function(table){
+				return table.Id !== "empty";
+			}).map(function(table){
+				table.Status = "1";
+				document.getElementById(table.Id).src = "img/table.jpg";
+			});
+			}
+		}
+	});
 	console.log("Selected Time: ",date," ",time);
 }
 

@@ -24,18 +24,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
-    background-attachment:fixed;
+
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
@@ -102,14 +91,135 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+.central-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.margin-top-20px {
+  margin-top : 20px
+}
+
+.margin-top-10px {
+  margin-top : 10px
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bs-example{
+  margin: 20px;
+}
+body{
+  margin:0;
+  padding:0;
+}
+p {
+  text-indent: 20px;
+}
+.tablesLayout{
+  border:pink 1px solid;
+}
+.tableLayout{
+  border:pink 1px solid;
+  width:50px;
+  height:50px;
+}
+.logo{
+  width: 120px;
+  height: 120px;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+}
+.signUpButton{
+  background-color: black;
+  color: white;
+  width:100px;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.saveUser{
+  margin: 5px;
+  width:100%;
+}
+.signInButton{
+  background-color: black;
+  color: white;
+  width:100px;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.notNowButton{
+  display: block;
+  margin-top: 10px;
+}
+.fgButtons{
+  width:70px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.tableSelected{
+  opacity : 0.3;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }
