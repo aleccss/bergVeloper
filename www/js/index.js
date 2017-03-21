@@ -19,6 +19,11 @@
 var app = {
     // Application Constructor
     initialize: function() {
+        var data = [];
+        data.push({CurrentPage : "login"});
+        var appState = new Utils.State(data, window.handler);        
+        Session.appState = appState;
+
         // TO-DO - check if there is internet and load data from local
         Model.getUsers().then(function(data){
           Session.setUsers(data);
@@ -27,7 +32,6 @@ var app = {
             Model.getBookings().then(function(data){
               var bookings = data;
               var restaurants = Session.restaurants[0].Restaurants;
-              // TO DO - implement logic to calculate bookings
               bookings.forEach(function(booking){
                 restaurants.forEach(function(restaurant){
                   if(booking.restaurantId === restaurant.Id){

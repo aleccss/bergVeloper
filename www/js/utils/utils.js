@@ -54,5 +54,5 @@ var Utils = {
     setTimeout(function () {
        $("#" + id).hide();
      }, 2000);
-  }
+  }  
 };

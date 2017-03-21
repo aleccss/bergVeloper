@@ -4,7 +4,7 @@ var SearchBox = React.createClass({
     this.props.doSearch(query);
     },
     render : function(){
-        return React.createElement("input", { className : "form-control",
+        return React.createElement("input", { className : "searchBox form-control margin-top-10px",
                                               type : "text",
                                               ref : "searchInput",
                                               placeholder : "Search Restaurant",
@@ -31,20 +31,20 @@ var DisplayTable = React.createClass({
       var rows=[];
       this.props.query.forEach(function(item,index) {
       rows.push(
-          React.createElement("li", {className : "list-group-item", onClick : function onClick() { return displayRestaurant(item.Id) }, key : index},
-            React.createElement("h4", null, item.Name),
-            React.createElement("p", null, "\u2605\u2605\u2606\u2606\u2606")
+          React.createElement("li", {className : "rest-list list-group-item", onClick : function onClick() { return displayRestaurant(item.Id) }, key : index},
+            React.createElement("img", {className : "rest-small-img", src : item.Picture}),
+            React.createElement("h5", {style : {fontWeight : "bold"}}, item.Name)
           )
         );
       });
       return React.createElement("ul", {className : "list-group margin-top-20px"}, rows,
-               React.createElement("button", {className : "btn central-content", onClick : function onClick() { return Utils.onBack()}}, "_________________")
+               React.createElement("button", {className : "btn central-content", onClick : function onClick() { return goToLogin()}}, "Create User")
              );
     }
 });
 
 var InstantBox = React.createClass({
-  doSearch:function(queryText){
+  doSearch : function(queryText){
     var queryResult=[];
     this.props.data.forEach(function(item){
         if(item.Name.toLowerCase().indexOf(queryText)!=-1)
@@ -55,13 +55,13 @@ var InstantBox = React.createClass({
         filteredData: queryResult
     })
   },
-  getInitialState:function(){
+  getInitialState : function(){
     return{
         query:'',
         filteredData: this.props.data
     }
   },
-  render:function(){
+  render : function(){
     return React.createElement("div", {className : "InstantBox central-content"},
       React.createElement(SearchBox, {query : this.state.query, doSearch : this.doSearch }),
       React.createElement(DisplayTable, {query : this.state.filteredData})
@@ -75,15 +75,15 @@ class AllRestaurants extends React.Component{
 		var filtered = this.props.filtered;
 		var state = this.props.state.getState();
 		return React.createElement("div",	{className : "container"},
-				     React.createElement("div",	{className : "row", style : {height : "60px"}}),
+				     React.createElement("div",	{className : "row", style : {height : "10px"}}),
              React.createElement("div",	{className : "row"},
                React.createElement("div",	{className : "col-xs-12"},
-                 React.createElement("img",	{className : "logo", src : "img/logo.jpg"})
+                 React.createElement("img",	{className : "logo-rest-list", src : "img/logo.jpg"})
                )
              ),
-             React.createElement("div",	{className : "row", style : {height : "40px"}}),
-             React.createElement("div",	{className : "row"},
-               React.createElement("div",	{className : "search"},
+             React.createElement("div",	{className : "row", style : {height : "10px"}}),
+             React.createElement("div",	{className : "row search"},
+               React.createElement("div",	null,
                  React.createElement(InstantBox, {data : list})
                )
              )
@@ -96,7 +96,13 @@ function displayRestaurant(id){
   data[0].CurrentRestaurant = id;
   data[0].CurrentPage = "display";
   var appState = new Utils.State(data, Utils.handler);
-  Session.previousState = Session.appState;
+  Session.appState = appState;
+  render(appState);
+}
+function goToLogin(){
+  var data = [];
+  data.push({CurrentPage : "login"});
+  var appState = new Utils.State(data, window.handler);
   Session.appState = appState;
   render(appState);
 }

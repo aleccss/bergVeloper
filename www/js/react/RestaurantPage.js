@@ -4,15 +4,15 @@ class Header extends React.Component{
 		var imageSrc = this.props.picture;
 		return (
 			React.createElement("div", {className : "container"},
-				React.createElement("div", {className : "row"},
-					React.createElement("div", { className : "col-xs-3",
+				React.createElement("div", {className : "row margin-top-10px"},
+					React.createElement("div", { className : "col-xs-4",
 																		   id : "picture",
 																		   style : {display : "block"}},
-						React.createElement("img", {src : imageSrc})
+						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
 					),
-					React.createElement("div", { className : "col-xs-9",
+					React.createElement("div", { className : "col-xs-3",
 																			 id : "name"},
-						React.createElement("h3", null, name)
+						React.createElement("h4", null, name)
 					)
 				)
 		  )
@@ -32,60 +32,65 @@ class Tabs extends React.Component{
 		return (
 			React.createElement("div", {className : "container"},
 			  React.createElement("div", {className : "row margin-top-20px"},
-					React.createElement("div", {className : "col-xs-12"},
-						React.createElement("ul", {className : "nav nav-tabs", id : "myTab"},
-							React.createElement("li", {className : "active"},
-								React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
-							),
-							React.createElement("li", null,
-								React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
-							),
-							React.createElement("li", null,
-								React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+					React.createElement("div", {className : "container"},
+					  React.createElement("div", {className : "row"},
+							React.createElement("ul", {className : "ul-navbar nav navbar-nav", id : "myTab"},
+							  React.createElement("li", null,
+								  React.createElement("span",	{ className: "glyphicon glyphicon-chevron-left back-glyphicon", onClick: function onClick() {	return goToAllPage(); } })
+							  ),
+								React.createElement("li", {className : "active"},
+									React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
+								),
+								React.createElement("li", null,
+									React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
+								),
+								React.createElement("li", null,
+									React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+								)
 							)
-						),
-						React.createElement("div", {className : "tab-content"},
+					  ),
+						React.createElement("div", {className : "row tab-content"},
 							React.createElement("div", {className : "tab-pane fade in active", id : "aboutTab"},
-								React.createElement("div", null, about.map(function(item, index){
+								React.createElement("div", {className : "margin-top-10px"}, about.map(function(item, index){
 																								   return React.createElement("p", {key : index}, item)
 																								 })
-								),
-								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+								)
 							),
-							React.createElement("div", {className : "tab-pane fade", id : "menuTab"},
-								React.createElement("div", null, menu.map(function(item, index){
+							React.createElement("div", {className : "row tab-pane fade", id : "menuTab"},
+								React.createElement("div", {className : "margin-top-10px"}, menu.map(function(item, index){
 																									 return React.createElement("p", {key : index}, item);
 																								 })
-								),
-								React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________")
+								)
 							),
-							React.createElement("div", {className : "tab-pane fade", id : "bookingsTab"},
+							React.createElement("div", {className : "row tab-pane fade", id : "bookingsTab"},
 								React.createElement("div", {className : "container" + classDisabled },
-									React.createElement("div", {className : "row"},
+									React.createElement("div", {className : "row margin-top-10px"},
 										React.createElement("div", {className : "col-xs-7"},
 											React.createElement("input", { className : "form-control",
 																										 id : "date",
 																									   name : "date",
-																									   placeholder : "Select Date",
-																									   type : "date"})
+																									   placeholder : "Date",
+																									   type : "text",
+																										 onFocus : function onFocus() { document.getElementById("date").type = 'date'; },
+																									   onChange : function onChange() { return timeChanged(); }})
 										),
 										React.createElement("div", {className : "col-xs-5"},
 									 		React.createElement("input", { className : "form-control",
 																									 	 id : "time",
 																								   	 name : "time",
-																								   	 placeholder : "Select Time",
-																								   	 type : "time",
+																								   	 placeholder : "Time",
+																										 type : "text",
+																										 onFocus : function onFocus() { document.getElementById("time").type = 'time'; },
 																									 	 onChange : function onChange() { return timeChanged(); }})
 										)
 									),
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
-										React.createElement("button",	{ className: "btn btn-warning central-content", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("button",	{ className: "btn central-content", onClick: function onClick() {	return Utils.onBack(); } },	"___________"),
-										React.createElement("div", {className : "alert alert-danger", id:"noTableSelected", style : {display : "none"}},
+										React.createElement("button",	{ className: "btn btn-warning central-content margin-top-10px", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
+										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
 							 	 		 React.createElement("strong", null, "Error! "),
 							 			 "No table selected."
-							 		 ),React.createElement("div", {className : "alert alert-danger", id:"noDateTime", style : {display : "none"}},
+							 		 ),React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
 										React.createElement("strong", null, "Error! "),
 										"No date/time selected."
 									)

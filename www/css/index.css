@@ -164,7 +164,15 @@ p {
   text-indent: 20px;
 }
 .tablesLayout{
-  border:pink 1px solid;
+  width: 282px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-radius: 10px;
+  border: darkred 4px solid;
+  padding-bottom: 10px;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 .tableLayout{
   border:pink 1px solid;
@@ -174,12 +182,19 @@ p {
 .logo{
   width: 120px;
   height: 120px;
-   margin-left: auto;
-   margin-right: auto;
-   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.logo-rest-list{
+  width: 120px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 .signUpButton{
-  background-color: black;
+  background-color: darkred;
   color: white;
   width:100px;
   margin: 5px;
@@ -192,7 +207,7 @@ p {
   width:100%;
 }
 .signInButton{
-  background-color: black;
+  background-color: darkred;
   color: white;
   width:100px;
   margin: 5px;
@@ -222,4 +237,67 @@ p {
 
 .pointer-events-none {
   pointer-events: none;
+}
+
+.ul-navbar {
+  background-color: darkred;
+  margin: auto;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ul-navbar a{
+  color: #eee;
+  background-color: darkred;
+}
+
+ul li.active{
+  opacity: 0.3;
+}
+
+.li-navbar {
+  position: relative;
+  display: list-item;
+  color: white;
+  margin: 0 3px;
+}
+
+.rest-small-img {
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.row .tab-content {
+  margin: 10px;
+}
+
+.rest-list {
+  margin-bottom: 5px;
+  border-radius: 3px;
+  text-transform: none;
+  color: darkred;
+}
+
+.searchBox {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.back-glyphicon {
+  height: 100%;
+  font-size: 18px;
+  color: white;
+  padding-top: 9px;
+}
+
+#aboutTab {
+  text-transform: none;
+}
+
+#menuTab {
+  text-transform: none;
 }

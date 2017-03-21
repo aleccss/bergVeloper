@@ -85,25 +85,25 @@ class LoginPage extends React.Component{
 			),
 			React.createElement("div", {className : "row", style : { height : "40px"}})
 		 ),
-		 React.createElement("div", {className : "container"},
-		   React.createElement("div", {className : "col-xs-2"}),
-			 React.createElement("div", {className : "col-xs-4"},
-			   React.createElement("img", { className : "fgButtons",
-				 															id : "FbButton",
-																			src : "img/icons/facebook.png"})
-		   ),
-			 React.createElement("div", {className : "col-xs-4"},
-			 	 React.createElement("img", { className : "fgButtons",
-																		  id : "GoogleButton",
-																		  src : "img/icons/googlePlus.png"})
-		   ),
-			 React.createElement("div", {className : "col-xs-2"})
-	 	 ),
-		 React.createElement("div", {className : "alert alert-danger", id:"errorLogin", style : {display : "none"}},
+		//  React.createElement("div", {className : "container"},
+		//    React.createElement("div", {className : "col-xs-2"}),
+		// 	 React.createElement("div", {className : "col-xs-4"},
+		// 	   React.createElement("img", { className : "fgButtons",
+		// 		 															id : "FbButton",
+		// 																	src : "img/icons/facebook.png"})
+		//    ),
+		// 	 React.createElement("div", {className : "col-xs-4"},
+		// 	 	 React.createElement("img", { className : "fgButtons",
+		// 																  id : "GoogleButton",
+		// 																  src : "img/icons/googlePlus.png"})
+		//    ),
+		// 	 React.createElement("div", {className : "col-xs-2"})
+		 //  ),
+		 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"errorLogin", style : {display : "none"}},
 	 		 React.createElement("strong", null, "Error! "),
 			 "Invalid UserName or Password."
 		 ),
-		 React.createElement("div", {className : "alert alert-danger", id:"emptyLogin", style : {display : "none"}},
+		 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"emptyLogin", style : {display : "none"}},
 	 		 React.createElement("strong", null, "Error! "),
 			 "Empty UserName or Password."
 		 )
@@ -116,7 +116,7 @@ function goToAllPage(){
 	var data = Session.restaurants;
 	data[0].CurrentPage = "all";
 	var appState = new Utils.State(data, Utils.handler);
-	Session.previousState = Session.appState;
+	Session.previousState = appState;
 	Session.appState = appState;
 	window.render(appState);
 }
