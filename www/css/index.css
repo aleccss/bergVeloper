@@ -368,3 +368,16 @@ li.active div, li.active a {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+.reserveButton {
+  background-color: #A6D73C;
+  color: #545454;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: medium;
+}

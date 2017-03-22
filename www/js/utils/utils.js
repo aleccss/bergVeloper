@@ -54,5 +54,27 @@ var Utils = {
     setTimeout(function () {
        $("#" + id).hide();
      }, 2000);
-  }  
+  },
+  goToLogin : function(){
+    var data = [];
+    data.push({CurrentPage : "login"});
+    var appState = new Utils.State(data, window.handler);
+    Session.appState = appState;
+    window.render(appState);
+  },
+  goToAllPage : function(){
+  	var data = Session.restaurants;
+  	data[0].CurrentPage = "all";
+  	var appState = new Utils.State(data, Utils.handler);
+  	Session.previousState = appState;
+  	Session.appState = appState;
+  	window.render(appState);
+  },
+  setLoggedUser : function(id){
+    if(id === null){
+      return;
+    }
+    Session.loggedUser = Session.users.find(function(item){
+                                              return item._id === id});
+  }
 };

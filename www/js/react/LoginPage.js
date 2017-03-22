@@ -84,7 +84,7 @@ class LoginPage extends React.Component{
 				React.createElement("div", {className : "col-xs-2"}),
 				React.createElement("div", {className : "col-xs-8"},
 					React.createElement("a", { className : "notNowButton",
-																					onClick : () => goToAllPage()}, "Skip")
+																					onClick : () => Utils.goToAllPage()}, "Skip")
 			  ),
 				React.createElement("div", {className : "col-xs-2"})
 			),
@@ -116,15 +116,6 @@ class LoginPage extends React.Component{
 	}
 }
 /** ---===== CODE =====--- **/
-
-function goToAllPage(){
-	var data = Session.restaurants;
-	data[0].CurrentPage = "all";
-	var appState = new Utils.State(data, Utils.handler);
-	Session.previousState = appState;
-	Session.appState = appState;
-	window.render(appState);
-}
 
 window.onclick = function(event) {
 	var signUpPopup = document.getElementById("signUpPopup");
@@ -178,11 +169,12 @@ function signInClick() {
 	   if(loginUser){
 			 Session.bookings.forEach(function(item){
 				 if(item.userId === loginUser._id){
-					 loginUser.bookings.push(item)
+					 loginUser.bookings.push(item);
 				 }
 			 });
-			 Session.loggedUser = loginUser;
-			 goToAllPage();
+			 window.localStorage.setItem("loggedUser", loginUser._id);
+			 Utils.setLoggedUser(window.localStorage.getItem("loggedUser"));
+			 Utils.goToAllPage();
 		 }else{
 	     Utils.showAndHideError("errorLogin");
 	 	 }

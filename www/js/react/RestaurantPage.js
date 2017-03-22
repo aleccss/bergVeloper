@@ -9,26 +9,13 @@ class Header extends React.Component{
 	  				     React.createElement("div",	{className : "row", style : {height : "10px"}}),
 	               React.createElement("div",	{className : "row"},
 	                 React.createElement("div",	{className : "col-xs-2"},
-	                   React.createElement("span", { className: "glyphicon glyphicon-chevron-left back-glyphicon", style  : {float : "left"}, onClick: function onClick() {	return goToAllPage(); } })
+	                   React.createElement("span", { className: "glyphicon glyphicon-chevron-left back-glyphicon", style  : {float : "left"}, onClick: function onClick() {	return Utils.goToAllPage(); } })
 	                 ),
 	                 React.createElement("div",	{className : "col-xs-8"},
 	                   React.createElement("img",	{className : "logo-rest-list", src : "img/logo2.png"})
 	                 ),
-	                 React.createElement("div",	{className : "col-xs-2 dropdown"},
-	                   React.createElement("span", { id : "dropDownMenu",
-	                                                 className : "glyphicon glyphicon-menu-hamburger back-glyphicon dropdown-toggle",
-	                                                 style  : {float : "right"},
-	                                                 "data-toggle" : "dropdown"
-	                                               }),
-	                   React.createElement("ul", {className : "hamb-menu dropdown-menu", "aria-labelledby" : "dropDownMenu"},
-	                     React.createElement("li", null,
-	                       React.createElement("a", { style : { color : "white"}}, "My Reservations")
-	                     ),
-	                     React.createElement("li", null,
-	                       React.createElement("a", { style : { color : "white"}, onClick : function onClick() { return signOut(); }}, "Sign out")
-	                     )
-	                   )
-	                 )
+	                 React.createElement(DropdownMenu),
+									 React.createElement(DisplayReservations)
 	               ),
 	               React.createElement("div",	{className : "row", style : {height : "10px"}})
 	             ),
@@ -46,8 +33,8 @@ class Header extends React.Component{
 				 				)
 				 		  )
 	          )
-		);
-	};
+					);
+				};
 }
 
 class Tabs extends React.Component{
@@ -98,7 +85,7 @@ class Tabs extends React.Component{
 							),
 							React.createElement("div", {className : "row tab-pane fade", id : "bookingsTab"},
 								React.createElement("div", {className : "container" + classDisabled },
-									React.createElement("div", {className : "row margin-top-10px"},
+									React.createElement("div", {className : "row"},
 										React.createElement("div", {className : "col-xs-7"},
 											React.createElement("input", { className : "form-control",
 																										 id : "date",
@@ -120,7 +107,7 @@ class Tabs extends React.Component{
 									),
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
-										React.createElement("button",	{ className: "btn btn-warning central-content margin-top-10px", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
+										React.createElement("button",	{ className: "btn reserveButton central-content margin-top-10px tablesLayout", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
 										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
 							 	 		 React.createElement("strong", null, "Error! "),
 							 			 "No table selected."
@@ -176,6 +163,7 @@ class DisplayRestaurant extends React.Component{
 			);
 	}
 }
+/** ---===== CODE =====--- **/
 
 function parseProp(prop){
 	var results = [];

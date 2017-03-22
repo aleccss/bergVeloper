@@ -1,5 +1,10 @@
 function findCurrentPage(state){
-		var currentPage = state.getState()[0].CurrentPage;
+		var currentPage;
+		if(state){
+			currentPage = state.getState()[0].CurrentPage;
+		} else {
+			currentPage = "";
+		}
 		var app;
 		if(currentPage === "all"){
 			app = React.createElement("div",null,
@@ -7,12 +12,14 @@ function findCurrentPage(state){
 																										filtered : state.getState()[0].Filtered,
 																										state : state})
 						);
-		}else if(currentPage === "login"){
-			app = React.createElement(LoginPage);
-		}else{
+		} else if(currentPage === "display"){
 			app = React.createElement("div", null,
 					 	  React.createElement(DisplayRestaurant, {state : state})
 					  );
+		} else if(currentPage === "login"){
+			app = React.createElement(LoginPage);
+		} else {			
+			app = React.createElement("img", {src : "img/logo2.jpg"});
 		}
 		return app;
 }

@@ -19,11 +19,6 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        var data = [];
-        data.push({CurrentPage : "login"});
-        var appState = new Utils.State(data, window.handler);        
-        Session.appState = appState;
-
         // TO-DO - check if there is internet and load data from local
         Model.getUsers().then(function(data){
           Session.setUsers(data);
@@ -39,7 +34,20 @@ var app = {
                   }
                 });
               });
+              var users = Session.users;
+              bookings.forEach(function(booking){
+                users.forEach(function(user){
+                  if(user._id === booking.userId){
+                    user.bookings.push(booking);
+                  }
+                });
+              });
               Session.setBookings(data);
+              if(window.localStorage.getItem("loggedUser") === null){
+                Utils.goToLogin();
+              } else {
+                Utils.goToAllPage();
+              }
             });
           });
         });
@@ -51,6 +59,12 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
+        if(window.localStorage.getItem("has_run") === null){
+          console.log("first RUN");
+          window.localStorage.setItem("has_run", "true");
+        } else {
+          console.log("NOT first RUN");
+        }
         this.receivedEvent('deviceready');
     },
 
