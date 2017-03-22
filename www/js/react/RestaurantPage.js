@@ -29,6 +29,10 @@ class Tabs extends React.Component{
 		if(!Session.loggedUser){
 			classDisabled = " disabled";
 		}
+	var currentDateTime = new Date();
+	var currentDateTimeSplit = currentDateTime.toISOString().split("T");
+	var currentDate = currentDateTimeSplit[0];
+	var currentTime = currentDateTimeSplit[1];
 		return (
 			React.createElement("div", {className : "container"},
 			  React.createElement("div", {className : "row margin-top-20px"},
@@ -71,6 +75,7 @@ class Tabs extends React.Component{
 																									   name : "date",
 																									   placeholder : "Date",
 																									   type : "text",
+																										 min : currentDate,
 																										 onFocus : function onFocus() { document.getElementById("date").type = 'date'; },
 																									   onChange : function onChange() { return timeChanged(); }})
 										),
@@ -80,6 +85,7 @@ class Tabs extends React.Component{
 																								   	 name : "time",
 																								   	 placeholder : "Time",
 																										 type : "text",
+																										 min : currentTime,
 																										 onFocus : function onFocus() { document.getElementById("time").type = 'time'; },
 																									 	 onChange : function onChange() { return timeChanged(); }})
 										)
@@ -123,7 +129,6 @@ class DisplayTables extends React.Component{
 														)
 													} else {
 														return React.createElement("img", { id : tableId,
-																																className : "pointer-events-none",
 																																key : index,
 																																src : "img/table1.jpg",
 																																onClick : function onClick(tableId) { return tableClick(tableId); }}
@@ -177,61 +182,98 @@ function timeChanged(){
 	var date = this.date + "T" + this.time;
 	var selectedDate = new Date(date);
 	var dateIntervalEnd = Utils.addHours(date, 2);
-  var bookedFlag = false;
-	bookings.map(function(booking){
-		var bookingDate = new Date(booking.dateTime);
-		if(selectedDate > bookingDate && bookingDate < dateIntervalEnd){
-			bookedFlag = true;
-			var reservedTables = booking.tableIds;
-			currentRestaurant.Tables.forEach(function(table){
-				booking.tableIds.forEach(function(reservedTable){
-					if(table.Id !== "empty"){
-						if(table.Id === reservedTable){
-							table.Status = "2";
-							document.getElementById(table.Id).src = "img/table1.jpg";
-						} else {
-							table.Status = "1";
-							document.getElementById(table.Id).src = "img/table.jpg";
-						}
-					}
-				});
-			});
-		} else {
-			if(!bookedFlag){
-			currentRestaurant.Tables.filter(function(table){
-				return table.Id !== "empty";
-			}).map(function(table){
-				table.Status = "1";
-				document.getElementById(table.Id).src = "img/table.jpg";
-			});
-			}
-		}
-	});
+  updateTablesStatus(bookings, currentRestaurant, selectedDate, dateIntervalEnd);
 	console.log("Selected Time: ",date," ",time);
 }
 
+function getAllBookedTables(bookings){
+	var bookedTables = [];
+	bookings.forEach(function(booking){
+		booking.tableIds.forEach(function(id){
+			bookedTables.push({Id : id, Status: "2",dateTime: booking.dateTime});
+		});
+	});
+	return bookedTables;
+}
+
+function clearAllTables(tables){
+	tables.forEach(function(table){
+		if(table.Id !== "empty"){
+		table.Status = "1";
+		document.getElementById(table.Id).src = "img/table.jpg";
+		document.getElementById(table.Id).className.replace("pointer-events-none", "");
+	}
+	});
+}
+
+function updateTablesStatus(bookings, currentRestaurant, selectedDate,dateIntervalEnd){
+	var tables = currentRestaurant.Tables;
+	var bookedTables = getAllBookedTables(bookings);
+	clearAllTables(tables);
+	if(bookedTables.length !== 0){
+		tables.forEach(function(table){
+			var shouldReserve = bookedTables.find(function(bookedTable){
+				return bookedTable.Id === table.Id;
+			});
+			if(shouldReserve){
+				var bookingDate = new Date(shouldReserve.dateTime);
+				if(selectedDate > bookingDate && bookingDate < dateIntervalEnd){
+							if(table.Id === "empty")
+								return;
+						if(shouldReserve.Id === table.Id){
+							table.Status = "2";
+							document.getElementById(table.Id).src = "img/table1.jpg";
+							document.getElementById(table.Id).className = "pointer-events-none";
+						}else{
+							table.Status = "1";
+							document.getElementById(table.Id).src = "img/table.jpg";
+							document.getElementById(table.Id).className.replace("pointer-events-none", "");
+						}
+			}
+		}
+	});
+}
+}
+
 function bookPressed(){
-	if(!this.date.value || !this.time.value){
+	if(!this.date || !this.time){
 		Utils.showAndHideError("noDateTime");
 		return;
 	}
-	var selectedTables = getSelectedTables();
+	var tables = document.getElementById("tables").children;
+	var selectedTables = getSelectedTables(tables);
 	if(selectedTables.length === 0){
 		Utils.showAndHideError("noTableSelected");
 		return;
 	}
 	var dateTime = this.date+"T"+this.time;
 	var selectedDate = new Date(dateTime);
+	var currentRestaurantId = Session.restaurants[0].CurrentRestaurant;
+	var restaurants = Session.restaurants[0].Restaurants;
+	var currentRestaurant = restaurants.find((item) => item.Id === currentRestaurantId );
 	var booking = { userId : Session.loggedUser._id,
-									restaurantId : Session.restaurants[0].CurrentRestaurant,
+									restaurantId : currentRestaurantId,
 									tableIds : selectedTables,
-									dateTime : selectedDate
+									dateTime : selectedDate,
+									restaurantName : currentRestaurant.Name
 								};
+	booking.tableIds.forEach(function(id){
+		currentRestaurant.Tables.forEach(function(table){
+			if(table.Id === "empty"){
+					return;
+			}
+			if(id === table.Id){
+					table.Status = "2";
+					document.getElementById(table.Id).src = "img/table1.jpg";
+					document.getElementById(table.Id).className = "pointer-events-none";
+			}
+		});
+	});
+
 	Model.processBooking(booking);
 }
 
-function getSelectedTables(){
-	var tables = document.getElementById("tables").children;
+function getSelectedTables(tables){
 	var selectedTables = [];
 	for(var i = 0; i < tables.length; i++){
 		if(tables[i].className === "tableSelected"){
