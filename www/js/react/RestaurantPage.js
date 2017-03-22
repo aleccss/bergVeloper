@@ -1,22 +1,52 @@
+// !!! className : "pointer-events-none"
+
 class Header extends React.Component{
 	render() {
 		var name = this.props.name;
 		var imageSrc = this.props.picture;
-		return (
-			React.createElement("div", {className : "container"},
-				React.createElement("div", {className : "row margin-top-10px"},
-					React.createElement("div", { className : "col-xs-4",
-																		   id : "picture",
-																		   style : {display : "block"}},
-						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
-					),
-					React.createElement("div", { className : "col-xs-3",
-																			 id : "name"},
-						React.createElement("h4", null, name)
-					)
-				)
-		  )
-		)
+		return ( React.createElement("div", null,
+	             React.createElement("div",	{className : "container signInTop"},
+	  				     React.createElement("div",	{className : "row", style : {height : "10px"}}),
+	               React.createElement("div",	{className : "row"},
+	                 React.createElement("div",	{className : "col-xs-2"},
+	                   React.createElement("span", { className: "glyphicon glyphicon-chevron-left back-glyphicon", style  : {float : "left"}, onClick: function onClick() {	return goToAllPage(); } })
+	                 ),
+	                 React.createElement("div",	{className : "col-xs-8"},
+	                   React.createElement("img",	{className : "logo-rest-list", src : "img/logo2.png"})
+	                 ),
+	                 React.createElement("div",	{className : "col-xs-2 dropdown"},
+	                   React.createElement("span", { id : "dropDownMenu",
+	                                                 className : "glyphicon glyphicon-menu-hamburger back-glyphicon dropdown-toggle",
+	                                                 style  : {float : "right"},
+	                                                 "data-toggle" : "dropdown"
+	                                               }),
+	                   React.createElement("ul", {className : "hamb-menu dropdown-menu", "aria-labelledby" : "dropDownMenu"},
+	                     React.createElement("li", null,
+	                       React.createElement("a", { style : { color : "white"}}, "My Reservations")
+	                     ),
+	                     React.createElement("li", null,
+	                       React.createElement("a", { style : { color : "white"}, onClick : function onClick() { return signOut(); }}, "Sign out")
+	                     )
+	                   )
+	                 )
+	               ),
+	               React.createElement("div",	{className : "row", style : {height : "10px"}})
+	             ),
+							 React.createElement("div", {className : "container"},
+				 				React.createElement("div", {className : "row rest-title-back"},
+				 					React.createElement("div", { className : "col-xs-4",
+				 																		   id : "picture",
+				 																		   style : {display : "block"}},
+				 						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
+				 					),
+				 					React.createElement("div", { className : "col-xs-3",
+				 																			 id : "name"},
+				 						React.createElement("h4", { className : "rest-title" }, name)
+				 					)
+				 				)
+				 		  )
+	          )
+		);
 	};
 }
 
@@ -31,21 +61,25 @@ class Tabs extends React.Component{
 		}
 		return (
 			React.createElement("div", {className : "container"},
-			  React.createElement("div", {className : "row margin-top-20px"},
+			  React.createElement("div", {className : "row"},
 					React.createElement("div", {className : "container"},
 					  React.createElement("div", {className : "row"},
 							React.createElement("ul", {className : "ul-navbar nav navbar-nav", id : "myTab"},
-							  React.createElement("li", null,
-								  React.createElement("span",	{ className: "glyphicon glyphicon-chevron-left back-glyphicon", onClick: function onClick() {	return goToAllPage(); } })
-							  ),
 								React.createElement("li", {className : "active"},
-									React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
+								  React.createElement("div", {className : "col-xs-4"},
+									  React.createElement("span", {className : "glyphicon glyphicon-info-sign", style : { display : "inline"}}),
+										React.createElement("a", {"data-toggle" : "tab", href : "#aboutTab"}, "About")
+								  )
 								),
 								React.createElement("li", null,
-									React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu")
+								   React.createElement("div", {className : "col-xs-4"},
+								  React.createElement("span", {className : "glyphicon glyphicon-cutlery", style : { display : "inline"}}),
+									React.createElement("a", {"data-toggle" : "tab", href : "#menuTab"}, "Menu"))
 								),
 								React.createElement("li", null,
-									React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Bookings")
+								 React.createElement("div", {className : "col-xs-4"},
+								  React.createElement("span", {className : "glyphicon glyphicon-edit", style : { display : "inline"}}),
+									React.createElement("a", {"data-toggle" : "tab", href : "#bookingsTab"}, "Reservation"))
 								)
 							)
 					  ),
@@ -123,7 +157,6 @@ class DisplayTables extends React.Component{
 														)
 													} else {
 														return React.createElement("img", { id : tableId,
-																																className : "pointer-events-none",
 																																key : index,
 																																src : "img/table1.jpg",
 																																onClick : function onClick(tableId) { return tableClick(tableId); }}
