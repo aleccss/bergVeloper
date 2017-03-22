@@ -1,16 +1,17 @@
 class LoginPage extends React.Component{
 	render() {
 		return React.createElement("div", null,
-			React.createElement("div", {className : "container"},
+			React.createElement("div", {className : "signInTop container"},
 			  React.createElement("div", {className : "row", style : {height : "60px"}}),
 				React.createElement("div", {className : "row"},
 				  React.createElement("div", {className : "col-xs-12"},
-					  React.createElement("img", {className : "logo", src : "img/logo.jpg"})
+					  React.createElement("img", {className : "logo", src : "img/logo.png"})
 					)
 				),
 				React.createElement("div", {className : "row", style : {height : "40px"}})
 			),
-			React.createElement("div", {className : "container input-group"},
+			React.createElement("div", {className : "signInContainer container input-group"},
+			  React.createElement("div", {className : "row", style : {height : "40px"}}),
 				React.createElement("div", {className : "row"},
 					React.createElement("div", {className : "col-xs-2"}),
 					React.createElement("div", {className : "col-xs-8"},
@@ -34,56 +35,60 @@ class LoginPage extends React.Component{
 					React.createElement("div", {className : "col-xs-2"})
 				),
 				React.createElement("div", {className : "row margin-top-10px"},
-					React.createElement("div", {className : "col-xs-1"}),
-					React.createElement("div", {className : "col-xs-5"},
-						React.createElement("button", { className : "btn signUpButton",
-																					  onClick : () => registerClick()}, "Register"),
-						React.createElement("div", { className : "modal",
-																				 id : "signUpPopup"},
-							React.createElement("div", { className : "modal-content input-group"},
-								React.createElement("span", { className : "close",
-																							onClick : () => spanClick()}, "x"),
-								React.createElement("p", { className : "myClass"}, "SignUp Information"),
-								React.createElement("input", { className : "form-control",
-																							 name : "user",
-																							 type : "text",
-																						 	 id : "username",
-																						   placeholder : "username",
-																						 	 style : {margin : "5px"}}),
-							  React.createElement("input", { className : "form-control",
-							 	 														   name : "password",
-							 															   type : "password",
-							 															   id : "password",
-							 															   placeholder : "password",
-							 															   style : {margin : "5px"}}),
-							  React.createElement("input", { className : "form-control",
-	 																					   name : "phone",
-	 																					 	 type : "number",
-	 																					   id : "phone",
-	 																					   placeholder : "phone",
-	 																					   style : {margin : "5px"}}),
-							  React.createElement("button", { className : "btn saveUser",
-																								type : "button",
-																							  onClick : () => saveUser()}, "Save")
-						  )
-						)
-					),
-					React.createElement("div", {className : "col-xs-5"},
+					React.createElement("div", {className : "col-xs-2"}),
+					React.createElement("div", {className : "col-xs-8"},
 						React.createElement("button", { className : "btn signInButton",
 																						type : "button",
 																						onClick : () => signInClick()}, "Sign In")
 				  ),
-					React.createElement("div", {className : "col-xs-1"})
+					React.createElement("div", {className : "col-xs-2"})
 			),
-			React.createElement("div", {className : "row"},
-				React.createElement("div", {className : "col-xs-3"}),
-				React.createElement("div", {className : "col-xs-6"},
-					React.createElement("a", { className : "btn btn-default notNowButton",
-																					onClick : () => goToAllPage()}, "Not now")
+			React.createElement("div", {className : "row margin-top-20px"},
+			  React.createElement("div", {className : "col-xs-2"}),
+				React.createElement("div", {className : "col-xs-8"},
+					React.createElement("a", { className : "signUpButton",
+																					onClick : () => registerClick()}, "Register"),
+					React.createElement("div", { className : "modal",
+																			 id : "signUpPopup"},
+						React.createElement("div", { className : "modal-content input-group"},
+							React.createElement("span", { className : "close",
+																						onClick : () => spanClick()}, "x"),
+							React.createElement("p", { className : "myClass"}, "SignUp Information"),
+							React.createElement("input", { className : "form-control",
+																						 name : "user",
+																						 type : "text",
+																						 id : "username",
+																						 placeholder : "username",
+																						 style : {margin : "5px"}}),
+							React.createElement("input", { className : "form-control",
+																						 name : "password",
+																						 type : "password",
+																						 id : "password",
+																						 placeholder : "password",
+																						 style : {margin : "5px"}}),
+							React.createElement("input", { className : "form-control",
+																						 name : "phone",
+																						 type : "number",
+																						 id : "phone",
+																						 placeholder : "phone",
+																						 style : {margin : "5px"}}),
+							React.createElement("button", { className : "btn saveUser",
+																							type : "button",
+																							onClick : () => saveUser()}, "Save")
+						)
+					)
+				),
+				React.createElement("div", {className : "col-xs-2"})
+			),
+			React.createElement("div", {className : "row", style : { marginTop : "95px"}},
+				React.createElement("div", {className : "col-xs-2"}),
+				React.createElement("div", {className : "col-xs-8"},
+					React.createElement("a", { className : "notNowButton",
+																					onClick : () => Utils.goToAllPage()}, "Skip")
 			  ),
-				React.createElement("div", {className : "col-xs-3"})
+				React.createElement("div", {className : "col-xs-2"})
 			),
-			React.createElement("div", {className : "row", style : { height : "40px"}})
+			React.createElement("div", {className : "row", style : { height : "20px"}})
 		 ),
 		//  React.createElement("div", {className : "container"},
 		//    React.createElement("div", {className : "col-xs-2"}),
@@ -99,27 +104,18 @@ class LoginPage extends React.Component{
 		//    ),
 		// 	 React.createElement("div", {className : "col-xs-2"})
 		 //  ),
-		 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"errorLogin", style : {display : "none"}},
-	 		 React.createElement("strong", null, "Error! "),
-			 "Invalid UserName or Password."
+		 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"errorLogin", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+	 		 React.createElement("strong", null, "ERROR! "),
+			 "Invalid username or password."
 		 ),
-		 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"emptyLogin", style : {display : "none"}},
-	 		 React.createElement("strong", null, "Error! "),
-			 "Empty UserName or Password."
+		 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"emptyLogin", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+	 		 React.createElement("strong", null, "ERROR! "),
+			 "Empty username or password."
 		 )
 		);
 	}
 }
 /** ---===== CODE =====--- **/
-
-function goToAllPage(){
-	var data = Session.restaurants;
-	data[0].CurrentPage = "all";
-	var appState = new Utils.State(data, Utils.handler);
-	Session.previousState = appState;
-	Session.appState = appState;
-	window.render(appState);
-}
 
 window.onclick = function(event) {
 	var signUpPopup = document.getElementById("signUpPopup");
@@ -171,9 +167,14 @@ function signInClick() {
 			 }
 		 })
 	   if(loginUser){
-			 Session.loggedUser = loginUser;
-			 console.log("success");
-			 goToAllPage();
+			 Session.bookings.forEach(function(item){
+				 if(item.userId === loginUser._id){
+					 loginUser.bookings.push(item);
+				 }
+			 });
+			 window.localStorage.setItem("loggedUser", loginUser._id);
+			 Utils.setLoggedUser(window.localStorage.getItem("loggedUser"));
+			 Utils.goToAllPage();
 		 }else{
 	     Utils.showAndHideError("errorLogin");
 	 	 }

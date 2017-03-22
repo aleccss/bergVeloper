@@ -32,6 +32,7 @@ body {
     padding:0px;
     text-transform:uppercase;
     width:100%;
+    background-color: #545454;
 }
 
 /* Portrait layout (default) */
@@ -107,7 +108,7 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
 }
 
 .margin-top-20px {
@@ -168,7 +169,7 @@ p {
   margin-top: 10px;
   padding-top: 10px;
   border-radius: 10px;
-  border: darkred 4px solid;
+  border: #6e6e6e 2px solid;
   padding-bottom: 10px;
   float: none;
   margin-left: auto;
@@ -187,37 +188,58 @@ p {
   display: block;
 }
 .logo-rest-list{
-  width: 120px;
-  height: 100px;
+  width: 215px;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 .signUpButton{
-  background-color: darkred;
   color: white;
-  width:100px;
-  margin: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  text-transform: none;
+  font-family: arial;
+  font-size: 14px;
+  text-decoration: underline;
+  float: right;
+}
+.signUpButton:hover, .signUpButton:active{
+  text-decoration: none;
 }
 .saveUser{
   margin: 5px;
   width:100%;
 }
 .signInButton{
-  background-color: darkred;
-  color: white;
-  width:100px;
+  font-family: arial;
+  background-color: #A6D73C;
+  color: #545454;
+  width: 100%;
   margin: 5px;
   margin-left: auto;
   margin-right: auto;
+  display: block;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: medium;
+}
+.signInTop{
+  background: #688624;
+}
+.signInContainer{
   display: block;
 }
 .notNowButton{
   display: block;
   margin-top: 10px;
+  text-align: center;
+  color: white;
+  font-family: arial;
+  text-decoration: underline;
+  text-transform: none;
+  font-size: 14px;
+}
+.notNowButton:hover, .notNowButton:active{
+  text-decoration: none;
 }
 .fgButtons{
   width:70px;
@@ -240,21 +262,36 @@ p {
 }
 
 .ul-navbar {
-  background-color: darkred;
+  background-color: #A6D73C;
   margin: auto;
   list-style-type: none;
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 25px;
 }
 
 .ul-navbar a{
-  color: #eee;
-  background-color: darkred;
+  color: black;
+  text-transform: none;
+  font-size: 17px;
+  font-weight: normal;
+  font-family: arial;
+  text-decoration: none;
+  padding-left: 5px;
 }
 
 ul li.active{
-  opacity: 0.3;
+  background: #688624;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #688624;
+}
+
+li.active div, li.active a {
+  color: white;
 }
 
 .li-navbar {
@@ -273,13 +310,21 @@ ul li.active{
 
 .row .tab-content {
   margin: 10px;
+  color: white;
 }
 
 .rest-list {
   margin-bottom: 5px;
-  border-radius: 3px;
+  padding-bottom: 14px;
   text-transform: none;
-  color: darkred;
+  font-family: arial;
+  font-weight: normal;
+  color: #d2cbcb;
+  border-bottom: 1px solid #6e6e6e;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: #545454;
 }
 
 .searchBox {
@@ -300,4 +345,43 @@ ul li.active{
 
 #menuTab {
   text-transform: none;
+}
+
+.hamb-menu {
+  text-transform: none;
+  color: white;
+  background: #688624;
+  font-family: arial;
+  border-radius: 0;
+}
+
+.rest-title {
+  color: lightgrey;
+  text-transform: none;
+  padding-top: 40%;
+  font-family: arial;
+}
+
+.rest-title-back {
+  background-image: url(/img/restBack.jpg);
+  background-size: contain;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.reserveButton {
+  background-color: #A6D73C;
+  color: #545454;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.loading {
+  width : 100%;
 }
