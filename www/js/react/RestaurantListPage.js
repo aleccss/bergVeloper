@@ -148,7 +148,7 @@ function getDisplayRestaurantsRows(data) {
     data.bookings.forEach(function(item, index) {
       rows.push(
           React.createElement("li", {className : "rest-list list-group-item", key : index},
-            React.createElement("div", {className : "col-xs-2"}, item.restaurantId),
+            React.createElement("div", {className : "col-xs-2"}, item.restaurantName),
             React.createElement("div", {className : "col-xs-4"}, item.dateTime),
             React.createElement("div", {className : "col-xs-2"}, item.tableIds.length)
           )

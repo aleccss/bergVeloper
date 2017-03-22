@@ -239,7 +239,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate,dateInterv
 			});
 			if(shouldReserve){
 				var bookingDate = new Date(shouldReserve.dateTime);
-				if(selectedDate > bookingDate && bookingDate < dateIntervalEnd){
+				if(selectedDate <= bookingDate && bookingDate <= dateIntervalEnd){
 							if(table.Id === "empty")
 								return;
 						if(shouldReserve.Id === table.Id){
