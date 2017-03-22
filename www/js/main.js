@@ -1,7 +1,7 @@
 function findCurrentPage(state){
 		var currentPage;
 		if(state){
-			currentPage = state.getState()[0].CurrentPage;
+			var currentPage = state.getState()[0].CurrentPage;
 		} else {
 			currentPage = "";
 		}
@@ -16,9 +16,10 @@ function findCurrentPage(state){
 			app = React.createElement("div", null,
 					 	  React.createElement(DisplayRestaurant, {state : state})
 					  );
+		// } else if(!Session.loggedUser || currentPage === "login"){
 		} else if(currentPage === "login"){
 			app = React.createElement(LoginPage);
-		} else {			
+		} else {
 			app = React.createElement("img", {src : "img/logo2.jpg"});
 		}
 		return app;

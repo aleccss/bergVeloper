@@ -43,7 +43,7 @@ var app = {
                 });
               });
               Session.setBookings(data);
-              if(window.localStorage.getItem("loggedUser") === null){
+              if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
                 Utils.goToLogin();
               } else {
                 Utils.goToAllPage();
