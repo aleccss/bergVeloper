@@ -20,7 +20,7 @@ function findCurrentPage(state){
 		} else if(currentPage === "login"){
 			app = React.createElement(LoginPage);
 		} else {
-			app = React.createElement("img", {src : "img/logo2.jpg"});
+			app = React.createElement("img", { className : "loading", src : "img/loading.png"});
 		}
 		return app;
 }
