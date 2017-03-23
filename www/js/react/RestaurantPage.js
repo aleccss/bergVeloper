@@ -118,10 +118,15 @@ class Tabs extends React.Component{
 										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
 							 	 		 React.createElement("strong", null, "Error! "),
 							 			 "No table selected."
-							 		 ),React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
+							 		 ),
+									 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
 										React.createElement("strong", null, "Error! "),
 										"No date/time selected."
-									)
+									),
+									React.createElement("div", {className : "alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none"}},
+									 React.createElement("strong", null, "Success! "),
+									 "Tables successfully booked."
+								 )
 									)
 								)
 							)
@@ -246,7 +251,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						if(shouldReserve.Id === table.Id){
 							table.Status = "2";
 							document.getElementById(table.Id).src = "img/table1.jpg";
-							document.getElementById(table.Id).className = "pointer-events-none";
+							document.getElementById(table.Id).className.replace("", "pointer-events-none");
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
@@ -294,6 +299,7 @@ function bookPressed(){
 	});
 
 	Model.processBooking(booking);
+	Utils.showAndHideError("tableBooked");
 }
 
 function getSelectedTables(tables){
