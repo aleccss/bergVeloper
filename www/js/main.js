@@ -23,7 +23,9 @@ function findCurrentPage(state){
 			app = React.createElement(LoginPage);
 		} else {
 			app = React.createElement("div", {className : "loading"},
-							React.createElement("img", { className : "loadingImg", src : "img/loading.png"})
+							React.createElement("div", {className : "col-xs-12"},
+								React.createElement("img", { className : "loadingImg", style : { width : "100%", marginTop : "20px"}, src : "img/loading.png"})
+							)
 						);
 		}
 		return app;

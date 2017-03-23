@@ -71,10 +71,11 @@ class DisplayReservations extends React.Component{
   render () {
     var rows = getDisplayRestaurantsRows(Session.loggedUser);
     return React.createElement("div", { className : "modal",
-                                 id : "myres"},
-      React.createElement("div", { className : "modal-content"},
-        React.createElement("span", { className : "close",
-                                      onClick : () => closeClick()}, "x"),
+                                        id : "myres"},
+      React.createElement("div", { className : "modal-content", style : { width : "95%", padding : "10px"}},
+        React.createElement("span", { className : "glyphicon glyphicon-remove register-exit",
+                                    onClick : () => closeClick()}),
+        React.createElement("p", { className : "register-info"}, "My Reservations"),
         React.createElement("ul", {className : "list-group"}, rows)
       )
     );
@@ -129,11 +130,11 @@ class DropdownMenu extends React.Component{
                                     style  : {float : "right"},
                                     "data-toggle" : "dropdown"
                                   }),
-      React.createElement("ul", {className : "hamb-menu dropdown-menu", "aria-labelledby" : "dropDownMenu"},
-        React.createElement("li", null,
+      React.createElement("ul", {className : "hamb-menu dropdown-menu dropdown-menu-right margin-top-20px", "aria-labelledby" : "dropDownMenu"},
+        React.createElement("li", {style : {padding : "12px 0px"}},
           React.createElement("a", { style : { color : "white"}, onClick : () => myResClick()}, "My Reservations")
         ),
-        React.createElement("li", null,
+        React.createElement("li", {style : {padding : "12px 0px"}},
           React.createElement("a", { style : { color : "white"}, onClick : function onClick() { return signOut(); }}, "Sign out")
         )
       )
@@ -144,14 +145,20 @@ class DropdownMenu extends React.Component{
 
 function getDisplayRestaurantsRows(data) {
   var rows = [];
+  //create title bar
+  rows.push (
+    React.createElement("li", {className : "rest-list list-group-item", style : { backgroundColor : "#688624", paddingBottom : "28px", color : "white", fontWeight : "bold", paddingLeft : "0px"}, key : "-1"},
+      React.createElement("div", {className : "col-xs-6"}, "Restaurant Name"),
+      React.createElement("div", {className : "col-xs-6"}, "Date/Time")
+    )
+  );
   if(data && data.bookings.length > 0){
     data.bookings.forEach(function(item, index) {
       var dateTime = Utils.formatDateTime(item.dateTime);
       rows.push(
-          React.createElement("li", {className : "rest-list list-group-item", key : index},
-            React.createElement("div", {className : "col-xs-2"}, item.restaurantName),
-            React.createElement("div", {className : "col-xs-4"}, dateTime),
-            React.createElement("div", {className : "col-xs-2"}, item.tableIds.length)
+          React.createElement("li", {className : "rest-list list-group-item", key : index, style : { paddingBottom : "32px", paddingLeft : "0px"}},
+            React.createElement("div", {className : "col-xs-6"}, item.restaurantName),
+            React.createElement("div", {className : "col-xs-6"}, dateTime)
           )
       );
     });

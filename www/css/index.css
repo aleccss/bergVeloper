@@ -112,11 +112,19 @@ h1 {
 }
 
 .margin-top-20px {
-  margin-top : 20px
+  margin-top : 20px;
 }
 
 .margin-top-10px {
-  margin-top : 10px
+  margin-top : 10px;
+}
+
+.margin-bottom-10px {
+  margin-bottom : 10px;
+}
+
+.margin-bottom-20px {
+  margin-bottom : 20px;
 }
 
 .modal {
@@ -132,12 +140,26 @@ h1 {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+
+.register-exit {
+  color: #979797;
+  font-size: 24px;
+  float: right;
+}
+
+.register-info {
+  text-transform: none;
+  color: white;
+  font-family: arial;
+  font-size: 18px;
+}
+
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #545454;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 0;
     width: 80%;
 }
 /* The Close Button */
@@ -160,9 +182,6 @@ h1 {
 body{
   margin:0;
   padding:0;
-}
-p {
-  text-indent: 20px;
 }
 .tablesLayout{
   width: 282px;
@@ -363,7 +382,7 @@ li.active div, li.active a {
 }
 
 .rest-title-back {
-  background-image: url(/img/restBack.jpg);
+  background-image: url(../img/restBack.jpg);
   background-size: contain;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -387,8 +406,9 @@ li.active div, li.active a {
 }
 
 .rest-back {
-  position: absolute;
+  position: relative;
   width: 100%;
+  opacity: 0.5;
 }
 
 /* Swipe 2 required styles */
