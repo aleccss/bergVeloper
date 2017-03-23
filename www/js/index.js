@@ -48,13 +48,23 @@ var app = {
                 window.localStorage.setItem("has_run", "true");
                 var elem = document.getElementById('sliderSwipe');
                 window.sliderSwipe = Swipe(elem, {
-                   startSlide: 4,
+                   startSlide: 0,
                    auto: 3000,
-                   continuous: true,
+                   continuous: false,
                    disableScroll: true,
                    stopPropagation: true,
                    callback: function(index, element) {},
-                   transitionEnd: function(index, element) {}
+                   //set index to last page, it should be an image with bgColor as bg
+                   transitionEnd: function(index, element) {
+                                        if(index > 0){
+                                          document.getElementById("goLeft").className = document.getElementById("goLeft").className.replace("hidden", "");
+                                        } else {
+                                          document.getElementById("goLeft").className += "hidden";
+                                        }
+                                        if(index === 6){
+                                          Utils.goToLogin();
+                                        }
+                   }
                 });
               } else {
                 if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){

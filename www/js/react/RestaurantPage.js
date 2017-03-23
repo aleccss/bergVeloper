@@ -223,7 +223,7 @@ function clearAllTables(tables){
 		if(table.Id !== "empty"){
 		table.Status = "1";
 		document.getElementById(table.Id).src = "img/table.jpg";
-		document.getElementById(table.Id).className.replace("pointer-events-none", "");
+		document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 	}
 	});
 }
@@ -250,7 +250,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
-							document.getElementById(table.Id).className.replace("pointer-events-none", "");
+							document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 						}
 			}
 		}

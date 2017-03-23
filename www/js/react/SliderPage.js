@@ -17,12 +17,16 @@ class Slider extends React.Component{
             ),
             React.createElement("div", null,
               React.createElement("img", { src : "img/restaurant5.png"})
-            )
+            ),
+            React.createElement("div", null,
+              React.createElement("img", { src : "img/restaurant6.png"})
+            ),
+            React.createElement("div", null)
           )
         ),
         React.createElement("div", { style : { textAlign : "center", paddingTop : "20px"}},
-          React.createElement("button", { onClick : () => window.sliderSwipe.prev()}, "prev"),
-          React.createElement("button", { onClick : () => window.sliderSwipe.next()}, "next")
+          React.createElement("span", { id : "goLeft", className: "glyphicon glyphicon-chevron-left back-glyphicon hidden", style  : {float : "left"}, onClick: () => window.sliderSwipe.prev()}),
+          React.createElement("span", { className: "glyphicon glyphicon-chevron-right back-glyphicon", style  : {float : "right"}, onClick: () => window.sliderSwipe.next()})
         )
       );
   };
