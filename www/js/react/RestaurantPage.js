@@ -20,7 +20,8 @@ class Header extends React.Component{
 	               React.createElement("div",	{className : "row", style : {height : "10px"}})
 	             ),
 							 React.createElement("div", {className : "container"},
-				 				React.createElement("div", {className : "row rest-title-back"},
+							  React.createElement("img", { className : "rest-back", src : "img/restBack.jpg"}),
+				 				React.createElement("div", {className : "row"},
 				 					React.createElement("div", { className : "col-xs-4",
 				 																		   id : "picture",
 				 																		   style : {display : "block"}},
@@ -227,7 +228,7 @@ function clearAllTables(tables){
 		if(table.Id !== "empty"){
 		table.Status = "1";
 		document.getElementById(table.Id).src = "img/table.jpg";
-		document.getElementById(table.Id).className.replace("pointer-events-none", "");
+		document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 	}
 	});
 }
@@ -254,7 +255,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
-							document.getElementById(table.Id).className.replace("pointer-events-none", "");
+							document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 						}
 			}
 		}
