@@ -115,16 +115,16 @@ class Tabs extends React.Component{
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
 										React.createElement("button",	{ className: "btn reserveButton central-content margin-top-10px tablesLayout", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
-							 	 		 React.createElement("strong", null, "Error! "),
+										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+							 	 		 React.createElement("strong", null, "ERROR! "),
 							 			 "No table selected."
 							 		 ),
-									 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
-										React.createElement("strong", null, "Error! "),
+									 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+										React.createElement("strong", null, "ERROR! "),
 										"No date/time selected."
 									),
-									React.createElement("div", {className : "alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none"}},
-									 React.createElement("strong", null, "Success! "),
+									React.createElement("div", {className : "alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+									 React.createElement("strong", null, "SUCCESS! "),
 									 "Tables successfully booked."
 								 )
 									)
@@ -251,7 +251,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						if(shouldReserve.Id === table.Id){
 							table.Status = "2";
 							document.getElementById(table.Id).src = "img/table1.jpg";
-							document.getElementById(table.Id).className.replace("", "pointer-events-none");
+							document.getElementById(table.Id).className = "pointer-events-none";
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
