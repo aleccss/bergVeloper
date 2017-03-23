@@ -250,7 +250,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						if(shouldReserve.Id === table.Id){
 							table.Status = "2";
 							document.getElementById(table.Id).src = "img/table1.jpg";
-							document.getElementById(table.Id).className = "pointer-events-none";
+							document.getElementById(table.Id).className.replace("", "pointer-events-none");
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
@@ -298,7 +298,7 @@ function bookPressed(){
 	});
 
 	Model.processBooking(booking);
-	Utils.showAndHideError("table");
+	Utils.showAndHideError("tableBooked");
 }
 
 function getSelectedTables(tables){
