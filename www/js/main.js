@@ -22,7 +22,9 @@ function findCurrentPage(state){
 		} else if(currentPage === "login"){
 			app = React.createElement(LoginPage);
 		} else {
-			app = React.createElement("img", { className : "loading", src : "img/loading.png"});
+			app = React.createElement("div", {className : "loading"},
+							React.createElement("img", { className : "loadingImg", src : "img/loading.png"})
+						);
 		}
 		return app;
 }

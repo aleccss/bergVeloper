@@ -386,6 +386,11 @@ li.active div, li.active a {
   width : 100%;
 }
 
+.rest-back {
+  position: absolute;
+  width: 100%;
+}
+
 /* Swipe 2 required styles */
 
 .swipe {

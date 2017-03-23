@@ -20,7 +20,8 @@ class Header extends React.Component{
 	               React.createElement("div",	{className : "row", style : {height : "10px"}})
 	             ),
 							 React.createElement("div", {className : "container"},
-				 				React.createElement("div", {className : "row rest-title-back"},
+							  React.createElement("img", { className : "rest-back", src : "img/restBack.jpg"}),
+				 				React.createElement("div", {className : "row"},
 				 					React.createElement("div", { className : "col-xs-4",
 				 																		   id : "picture",
 				 																		   style : {display : "block"}},
