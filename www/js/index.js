@@ -43,10 +43,25 @@ var app = {
                 });
               });
               Session.setBookings(data);
-              if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
-                Utils.goToLogin();
+              if(window.localStorage.getItem("has_run") === null || window.localStorage.getItem("has_run") === "null"){
+                Utils.showTutorialPage();
+                window.localStorage.setItem("has_run", "true");
+                var elem = document.getElementById('sliderSwipe');
+                window.sliderSwipe = Swipe(elem, {
+                   startSlide: 4,
+                   auto: 3000,
+                   continuous: true,
+                   disableScroll: true,
+                   stopPropagation: true,
+                   callback: function(index, element) {},
+                   transitionEnd: function(index, element) {}
+                });
               } else {
-                Utils.goToAllPage();
+                if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
+                  Utils.goToLogin();
+                } else {
+                  Utils.goToAllPage();
+                }
               }
             });
           });
@@ -59,12 +74,6 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        if(window.localStorage.getItem("has_run") === null){
-          console.log("first RUN");
-          window.localStorage.setItem("has_run", "true");
-        } else {
-          console.log("NOT first RUN");
-        }
         this.receivedEvent('deviceready');
     },
 

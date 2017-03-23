@@ -70,6 +70,13 @@ var Utils = {
   	Session.appState = appState;
   	window.render(appState);
   },
+  showTutorialPage : function(){
+    var data = [];
+    data.push({CurrentPage : "slider"});
+    var appState = new Utils.State(data, window.handler);
+    Session.appState = appState;
+    window.render(appState);
+  },
   setLoggedUser : function(id){
     if(id === null){
       return;
