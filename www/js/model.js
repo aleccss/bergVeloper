@@ -75,5 +75,7 @@ processBooking : function(booking){
   booking._id = id.toString();
   this.addBooking(booking);
 	bookings.push(booking);
+  var user = Session.loggedUser;
+  user.bookings.push(booking);
 }
 };
