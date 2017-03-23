@@ -203,8 +203,7 @@ function timeChanged(){
 
 	var date = this.date + "T" + this.time;
 	var selectedDate = new Date(date);
-	var dateIntervalEnd = Utils.addHours(date, 2);
-  updateTablesStatus(bookings, currentRestaurant, selectedDate, dateIntervalEnd);
+  updateTablesStatus(bookings, currentRestaurant, selectedDate);
 	console.log("Selected Time: ",date," ",time);
 }
 
@@ -228,7 +227,7 @@ function clearAllTables(tables){
 	});
 }
 
-function updateTablesStatus(bookings, currentRestaurant, selectedDate,dateIntervalEnd){
+function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 	var tables = currentRestaurant.Tables;
 	var bookedTables = getAllBookedTables(bookings);
 	clearAllTables(tables);
@@ -239,7 +238,8 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate,dateInterv
 			});
 			if(shouldReserve){
 				var bookingDate = new Date(shouldReserve.dateTime);
-				if(selectedDate <= bookingDate && bookingDate <= dateIntervalEnd){
+				var dateIntervalEnd = Utils.addHours(bookingDate, 2);
+				if(bookingDate <= selectedDate && selectedDate <= dateIntervalEnd){
 							if(table.Id === "empty")
 								return;
 						if(shouldReserve.Id === table.Id){
