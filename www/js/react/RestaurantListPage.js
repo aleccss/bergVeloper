@@ -146,10 +146,11 @@ function getDisplayRestaurantsRows(data) {
   var rows = [];
   if(data && data.bookings.length > 0){
     data.bookings.forEach(function(item, index) {
+      var dateTime = Utils.formatDateTime(item.dateTime);
       rows.push(
           React.createElement("li", {className : "rest-list list-group-item", key : index},
             React.createElement("div", {className : "col-xs-2"}, item.restaurantName),
-            React.createElement("div", {className : "col-xs-4"}, item.dateTime),
+            React.createElement("div", {className : "col-xs-4"}, dateTime),
             React.createElement("div", {className : "col-xs-2"}, item.tableIds.length)
           )
       );

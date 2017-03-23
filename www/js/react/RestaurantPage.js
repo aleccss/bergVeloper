@@ -277,7 +277,7 @@ function bookPressed(){
 	var booking = { userId : Session.loggedUser._id,
 									restaurantId : currentRestaurantId,
 									tableIds : selectedTables,
-									dateTime : selectedDate,
+									dateTime : dateTime,
 									restaurantName : currentRestaurant.Name
 								};
 	booking.tableIds.forEach(function(id){
