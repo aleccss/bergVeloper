@@ -43,7 +43,7 @@ var app = {
                 });
               });
               Session.setBookings(data);
-              //if(window.localStorage.getItem("has_run") === null || window.localStorage.getItem("has_run") === "null"){
+              if(window.localStorage.getItem("has_run") === null || window.localStorage.getItem("has_run") === "null"){
                 Utils.showTutorialPage();
                 window.localStorage.setItem("has_run", "true");
                 var elem = document.getElementById('sliderSwipe');
@@ -56,13 +56,13 @@ var app = {
                    callback: function(index, element) {},
                    transitionEnd: function(index, element) {}
                 });
-              // } else {
-              //   if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
-              //     Utils.goToLogin();
-              //   } else {
-              //     Utils.goToAllPage();
-              //   }
-              // }
+              } else {
+                if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
+                  Utils.goToLogin();
+                } else {
+                  Utils.goToAllPage();
+                }
+              }
             });
           });
         });
