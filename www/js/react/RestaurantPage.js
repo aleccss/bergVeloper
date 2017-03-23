@@ -117,10 +117,15 @@ class Tabs extends React.Component{
 										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
 							 	 		 React.createElement("strong", null, "Error! "),
 							 			 "No table selected."
-							 		 ),React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
+							 		 ),
+									 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
 										React.createElement("strong", null, "Error! "),
 										"No date/time selected."
-									)
+									),
+									React.createElement("div", {className : "alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none"}},
+									 React.createElement("strong", null, "Success! "),
+									 "Tables successfully booked."
+								 )
 									)
 								)
 							)
@@ -293,6 +298,7 @@ function bookPressed(){
 	});
 
 	Model.processBooking(booking);
+	Utils.showAndHideError("table");
 }
 
 function getSelectedTables(tables){
