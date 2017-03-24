@@ -73,10 +73,10 @@ class DisplayReservations extends React.Component{
     return React.createElement("div", { className : "modal",
                                         id : "myres"},
       React.createElement("div", { className : "modal-content", style : { width : "95%", padding : "10px"}},
-        React.createElement("span", { className : "glyphicon glyphicon-remove register-exit",
+        React.createElement("span", { className : "glyphicon glyphicon-remove register-exit margin-top-10px",
                                     onClick : () => closeClick()}),
-        React.createElement("p", { className : "register-info"}, "My Reservations"),
-        React.createElement("ul", {className : "list-group"}, rows)
+        React.createElement("p", { className : "register-info margin-top-10px", style : {paddingLeft : "10px"}}, "My Reservations"),
+        React.createElement("ul", {className : "list-group margin-top-20px"}, rows)
       )
     );
   }
@@ -141,13 +141,12 @@ class DropdownMenu extends React.Component{
     );
   }
 }
-/** ---===== CODE =====--- **/
 
 function getDisplayRestaurantsRows(data) {
   var rows = [];
   //create title bar
   rows.push (
-    React.createElement("li", {className : "rest-list list-group-item", style : { backgroundColor : "#688624", paddingBottom : "28px", color : "white", fontWeight : "bold", paddingLeft : "0px"}, key : "-1"},
+    React.createElement("li", {className : "rest-list list-group-item", style : { backgroundColor : "#688624", paddingBottom : "28px", color : "white", fontWeight : "bold", paddingLeft : "0px", borderRadius : "0px"}, key : "-1"},
       React.createElement("div", {className : "col-xs-6"}, "Restaurant Name"),
       React.createElement("div", {className : "col-xs-6"}, "Date/Time")
     )
@@ -165,6 +164,8 @@ function getDisplayRestaurantsRows(data) {
   }
   return rows;
 }
+
+/** ---===== CODE =====--- **/
 
 window.onclick = function(event) {
 	var myRes = document.getElementById("myres");

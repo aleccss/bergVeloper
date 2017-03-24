@@ -88,8 +88,10 @@ var Utils = {
     var result = "";
     if(dateTime.indexOf(".") !== -1){
       result = dateTime.substr(0, dateTime.indexOf(".") - 3);
+      result = result.replace("T", " ");
+    } else {
+      result = dateTime.replace("T", " ");
     }
-    result = result.replace("T", " ");
     return result;
   }
 };

@@ -377,15 +377,15 @@ li.active div, li.active a {
 .rest-title {
   color: lightgrey;
   text-transform: none;
-  padding-top: 40%;
+  padding-top: 25px;
   font-family: arial;
 }
 
 .rest-title-back {
   background-image: url(../img/restBack.jpg);
-  background-size: contain;
-  padding-top: 10px;
-  padding-bottom: 20px;
+  background-size: cover;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .reserveButton {
@@ -409,6 +409,10 @@ li.active div, li.active a {
   position: relative;
   width: 100%;
   opacity: 0.5;
+}
+
+p {
+  font-size: 14px;
 }
 
 /* Swipe 2 required styles */

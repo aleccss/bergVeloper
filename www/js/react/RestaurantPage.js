@@ -21,12 +21,12 @@ class Header extends React.Component{
 	             ),
 							 React.createElement("div", {className : "container", style : { paddingLeft: "0px", paddingRight: "0px"}},
 				 				React.createElement("div", {className : "row rest-title-back"},
-				 					React.createElement("div", { className : "col-xs-4",
+				 					React.createElement("div", { className : "col-xs-3",
 				 																		   id : "picture",
 				 																		   style : {display : "block"}},
-				 						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
+				 						React.createElement("img", {src : imageSrc, style : {width : "90px", padding : "8px 0px 8px 8px"}})
 				 					),
-				 					React.createElement("div", { className : "col-xs-3",
+				 					React.createElement("div", { className : "col-xs-9",
 				 																			 id : "name"},
 				 						React.createElement("h4", { className : "rest-title" }, name)
 				 					)
@@ -147,16 +147,18 @@ class DisplayTables extends React.Component{
 														return React.createElement("img", { key : index,
 																																src : "img/emptyTable.jpg"}
 														)
-													} else if(item.Status === "1") {
+													}
+													//else if(item.Status === "1") {
+													// 	return React.createElement("img", { id : tableId,
+													// 																			key : index,
+													// 																			src : "img/table.jpg",
+													// 																			onClick : function onClick(tableId) { return tableClick(tableId); }}
+													// 	)
+													// }
+													else {
 														return React.createElement("img", { id : tableId,
 																																key : index,
 																																src : "img/table.jpg",
-																																onClick : function onClick(tableId) { return tableClick(tableId); }}
-														)
-													} else {
-														return React.createElement("img", { id : tableId,
-																																key : index,
-																																src : "img/table1.jpg",
 																																onClick : function onClick(tableId) { return tableClick(tableId); }}
 														)
 													}
@@ -297,6 +299,7 @@ function bookPressed(){
 		});
 	});
 
+  currentRestaurant.Bookings.push(booking);
 	Model.processBooking(booking);
 	Utils.showAndHideError("tableBooked");
 }
