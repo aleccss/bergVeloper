@@ -191,9 +191,6 @@ function displayRestaurant(id){
   render(appState);
 }
 
-function showReservations(){
-  console.log("showReservationsPressed");
-}
 function signOut(){
   window.localStorage.setItem("loggedUser", null);
   Session.loggedUser = null;

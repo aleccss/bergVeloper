@@ -148,13 +148,6 @@ class DisplayTables extends React.Component{
 																																src : "img/emptyTable.jpg"}
 														)
 													}
-													//else if(item.Status === "1") {
-													// 	return React.createElement("img", { id : tableId,
-													// 																			key : index,
-													// 																			src : "img/table.jpg",
-													// 																			onClick : function onClick(tableId) { return tableClick(tableId); }}
-													// 	)
-													// }
 													else {
 														return React.createElement("img", { id : tableId,
 																																key : index,
@@ -169,7 +162,7 @@ class DisplayTables extends React.Component{
 
 class DisplayRestaurant extends React.Component{
 	render(){
-		var currentRestaurant = findRestaurant(this.props.state.getState());
+		var currentRestaurant = findRestaurant();
 		return React.createElement("div",	null,
 				React.createElement(Header, { name: currentRestaurant.Name, picture: currentRestaurant.Picture }),
 				React.createElement(Tabs, { about: currentRestaurant.About, menu: currentRestaurant.Menu, tables: currentRestaurant.Tables })
@@ -184,7 +177,7 @@ function parseProp(prop){
 	return array;
 }
 
-function findRestaurant(state){
+function findRestaurant(){
 	var array = Session.restaurants[0].Restaurants;
 	var id = Session.restaurants[0].CurrentRestaurant;
 	return array.find((item) => item.Id === id );
@@ -304,9 +297,9 @@ function bookPressed(){
 	});
 
   currentRestaurant.Bookings.push(booking);
-	Model.processBooking(booking);
-	Utils.showAndHideError("tableBooked");
-}
+		Model.processBooking(booking);
+		Utils.showAndHideError("tableBooked");
+	}
 
 function getSelectedTables(tables){
 	var selectedTables = [];
