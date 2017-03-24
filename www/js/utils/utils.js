@@ -49,6 +49,11 @@ var Utils = {
     result.setTime(result.getTime() + (h*60*60*1000));
     return result;
   },
+  substractHours : function(date, h){
+    var result = new Date(date);
+    result.setTime(result.getTime() - (h*60*60*1000));
+    return result;
+  },
   showAndHideError : function(id) {
     $("#"+id).show();
     setTimeout(function () {

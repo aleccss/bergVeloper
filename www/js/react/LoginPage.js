@@ -152,7 +152,6 @@ function saveUser() {
     Model.saveUser(user);
 		users.push(user);
   }
-  console.log(username + "|" + password + "|" + phone);
 };
 
 function signInClick() {

@@ -191,8 +191,9 @@ function displayRestaurant(id){
   render(appState);
 }
 
-function signOut(){
+function signOut(){  
   window.localStorage.setItem("loggedUser", null);
+  Session.loggedUser.bookings = [];
   Session.loggedUser = null;
   Utils.goToLogin();
 }

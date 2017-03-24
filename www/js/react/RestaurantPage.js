@@ -204,7 +204,6 @@ function timeChanged(){
 	var date = this.date + "T" + this.time;
 	var selectedDate = new Date(date);
   updateTablesStatus(bookings, currentRestaurant, selectedDate);
-	console.log("Selected Time: ",date," ",time);
 }
 
 function getAllBookedTables(bookings){
@@ -232,29 +231,35 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 	var bookedTables = getAllBookedTables(bookings);
 	clearAllTables(tables);
 	if(bookedTables.length !== 0){
-		tables.forEach(function(table){
-			var shouldReserve = bookedTables.find(function(bookedTable){
+		bookedTables.forEach(function(bookedTable){
+			var bookingDate = new Date(bookedTable.dateTime);
+			var dateIntervalEnd = Utils.addHours(bookingDate, 2);
+			var dateIntervalStart = Utils.substractHours(bookingDate, 2);
+			var findTable = tables.find(function(table){
 				return bookedTable.Id === table.Id;
 			});
-			if(shouldReserve){
-				var bookingDate = new Date(shouldReserve.dateTime);
-				var dateIntervalEnd = Utils.addHours(bookingDate, 2);
-				if(bookingDate <= selectedDate && selectedDate <= dateIntervalEnd){
-							if(table.Id === "empty")
-								return;
-						if(shouldReserve.Id === table.Id){
-							table.Status = "2";
-							document.getElementById(table.Id).src = "img/tables/tableRed.png";
-							document.getElementById(table.Id).className = "pointer-events-none";
-						}else{
-							table.Status = "1";
-							document.getElementById(table.Id).src = "img/tables/tableGreen.png";
-							document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
-						}
+			if(dateIntervalStart < selectedDate && selectedDate < dateIntervalEnd){
+				updateTable(findTable, "2");
+			} else {
+				updateTable(findTable, "1");
 			}
-		}
-	});
+		});
+	}
 }
+
+function updateTable(table, status){
+	if(table.Id === "empty"){
+		return;
+	}
+	if(status === "1"){
+		table.Status = "1"
+		document.getElementById(table.Id).src = "img/tables/tableGreen.png";
+		document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
+	} else {
+		table.Status = "2";
+		document.getElementById(table.Id).src = "img/tables/tableRed.png";
+		document.getElementById(table.Id).className = "pointer-events-none";
+	}
 }
 
 function bookPressed(){
