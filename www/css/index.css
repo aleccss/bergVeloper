@@ -382,7 +382,7 @@ li.active div, li.active a {
 }
 
 .rest-title-back {
-  background-image: url(../img/restBack.jpg);
+  background-image: url(../img/restaurants/restBack.jpg);
   background-size: cover;
   margin-left: 0;
   margin-right: 0;
@@ -415,6 +415,13 @@ p {
   font-size: 14px;
 }
 
+.skipTutorialBtn {
+  border: 0px;
+  width: 200px;
+  display: inline;
+  margin-top: 8px;
+}
+
 /* Swipe 2 required styles */
 
 .swipe {
@@ -434,17 +441,7 @@ p {
 
 #sliderSwipe div img{
   display:block;
-  font-weight:bold;
-  color:#14ADE5;
-  font-size:20px;
-  text-align:center;
   margin:10px;
-  padding:100px 10px;
-  box-shadow: 0 1px #EBEBEB;
-  background: #fff;
-  border-radius: 3px;
-  border: 1px solid;
-  border-color: #E5E5E5 #D3D3D3 #B9C1C6;
 }
 
 /* END required styles */
