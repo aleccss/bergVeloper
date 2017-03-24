@@ -30,6 +30,12 @@ QUnit.test('#addHours', function(assert) {
   assert.deepEqual( Utils.addHours(date, 2),result, "ok");
 });
 
+QUnit.test('#substractHours', function(assert) {
+  var date = new Date("2017-03-25T10:00:00");
+  var result = new Date("2017-03-25T08:00:00");
+  assert.deepEqual( Utils.substractHours(date, 2),result, "ok");
+});
+
 QUnit.test('#formatDateTime', function(assert) {
   var date = "2017-03-10T22:02:00.000Z";
   assert.deepEqual( Utils.formatDateTime(date),"2017-03-10 22:02", "ok");
