@@ -19,15 +19,14 @@ class Header extends React.Component{
 	               ),
 	               React.createElement("div",	{className : "row", style : {height : "10px"}})
 	             ),
-							 React.createElement("div", {className : "container"},
-							  React.createElement("img", { className : "rest-back", src : "img/restBack.jpg"}),
-				 				React.createElement("div", {className : "row"},
-				 					React.createElement("div", { className : "col-xs-4",
+							 React.createElement("div", {className : "container", style : { paddingLeft: "0px", paddingRight: "0px"}},
+				 				React.createElement("div", {className : "row rest-title-back"},
+				 					React.createElement("div", { className : "col-xs-3",
 				 																		   id : "picture",
 				 																		   style : {display : "block"}},
-				 						React.createElement("img", {src : imageSrc, style : {width : "100%"}})
+				 						React.createElement("img", {src : imageSrc, style : {width : "90px", padding : "8px 0px 8px 8px"}})
 				 					),
-				 					React.createElement("div", { className : "col-xs-3",
+				 					React.createElement("div", { className : "col-xs-9",
 				 																			 id : "name"},
 				 						React.createElement("h4", { className : "rest-title" }, name)
 				 					)
@@ -115,16 +114,16 @@ class Tabs extends React.Component{
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
 										React.createElement("button",	{ className: "btn reserveButton central-content margin-top-10px tablesLayout", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none"}},
-							 	 		 React.createElement("strong", null, "Error! "),
+										React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+							 	 		 React.createElement("strong", null, "ERROR! "),
 							 			 "No table selected."
 							 		 ),
-									 React.createElement("div", {className : "alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none"}},
-										React.createElement("strong", null, "Error! "),
+									 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+										React.createElement("strong", null, "ERROR! "),
 										"No date/time selected."
 									),
-									React.createElement("div", {className : "alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none"}},
-									 React.createElement("strong", null, "Success! "),
+									React.createElement("div", {className : "container alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+									 React.createElement("strong", null, "SUCCESS! "),
 									 "Tables successfully booked."
 								 )
 									)
@@ -148,16 +147,18 @@ class DisplayTables extends React.Component{
 														return React.createElement("img", { key : index,
 																																src : "img/emptyTable.jpg"}
 														)
-													} else if(item.Status === "1") {
+													}
+													//else if(item.Status === "1") {
+													// 	return React.createElement("img", { id : tableId,
+													// 																			key : index,
+													// 																			src : "img/table.jpg",
+													// 																			onClick : function onClick(tableId) { return tableClick(tableId); }}
+													// 	)
+													// }
+													else {
 														return React.createElement("img", { id : tableId,
 																																key : index,
 																																src : "img/table.jpg",
-																																onClick : function onClick(tableId) { return tableClick(tableId); }}
-														)
-													} else {
-														return React.createElement("img", { id : tableId,
-																																key : index,
-																																src : "img/table1.jpg",
 																																onClick : function onClick(tableId) { return tableClick(tableId); }}
 														)
 													}
@@ -251,7 +252,7 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 						if(shouldReserve.Id === table.Id){
 							table.Status = "2";
 							document.getElementById(table.Id).src = "img/table1.jpg";
-							document.getElementById(table.Id).className.replace("", "pointer-events-none");
+							document.getElementById(table.Id).className = "pointer-events-none";
 						}else{
 							table.Status = "1";
 							document.getElementById(table.Id).src = "img/table.jpg";
@@ -298,6 +299,7 @@ function bookPressed(){
 		});
 	});
 
+  currentRestaurant.Bookings.push(booking);
 	Model.processBooking(booking);
 	Utils.showAndHideError("tableBooked");
 }

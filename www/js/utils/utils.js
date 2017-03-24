@@ -83,5 +83,15 @@ var Utils = {
     }
     Session.loggedUser = Session.users.find(function(item){
                                               return item._id === id});
+  },
+  formatDateTime : function(dateTime){
+    var result = "";
+    if(dateTime.indexOf(".") !== -1){
+      result = dateTime.substr(0, dateTime.indexOf(".") - 3);
+      result = result.replace("T", " ");
+    } else {
+      result = dateTime.replace("T", " ");
+    }
+    return result;
   }
 };
