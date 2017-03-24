@@ -162,7 +162,7 @@ class DisplayTables extends React.Component{
 
 class DisplayRestaurant extends React.Component{
 	render(){
-		var currentRestaurant = findRestaurant(this.props.state.getState());
+		var currentRestaurant = findRestaurant();
 		return React.createElement("div",	null,
 				React.createElement(Header, { name: currentRestaurant.Name, picture: currentRestaurant.Picture }),
 				React.createElement(Tabs, { about: currentRestaurant.About, menu: currentRestaurant.Menu, tables: currentRestaurant.Tables })
@@ -177,7 +177,7 @@ function parseProp(prop){
 	return array;
 }
 
-function findRestaurant(state){
+function findRestaurant(){
 	var array = Session.restaurants[0].Restaurants;
 	var id = Session.restaurants[0].CurrentRestaurant;
 	return array.find((item) => item.Id === id );
@@ -258,6 +258,10 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 }
 
 function bookPressed(){
+	if(typeof this.date === "object"){
+		this.date = this.date.value;
+		this.time = this.time.value;
+	}
 	if(!this.date || !this.time){
 		Utils.showAndHideError("noDateTime");
 		return;
@@ -293,9 +297,9 @@ function bookPressed(){
 	});
 
   currentRestaurant.Bookings.push(booking);
-	Model.processBooking(booking);
-	Utils.showAndHideError("tableBooked");
-}
+		Model.processBooking(booking);
+		Utils.showAndHideError("tableBooked");
+	}
 
 function getSelectedTables(tables){
 	var selectedTables = [];
