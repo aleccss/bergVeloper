@@ -145,20 +145,13 @@ class DisplayTables extends React.Component{
 													var tableId = item.Id;
 													if(tableId === "empty") {
 														return React.createElement("img", { key : index,
-																																src : "img/emptyTable.jpg"}
+																																src : "img/tables/emptyTable.jpg"}
 														)
 													}
-													//else if(item.Status === "1") {
-													// 	return React.createElement("img", { id : tableId,
-													// 																			key : index,
-													// 																			src : "img/table.jpg",
-													// 																			onClick : function onClick(tableId) { return tableClick(tableId); }}
-													// 	)
-													// }
 													else {
 														return React.createElement("img", { id : tableId,
 																																key : index,
-																																src : "img/table.jpg",
+																																src : "img/tables/tableGreen.png",
 																																onClick : function onClick(tableId) { return tableClick(tableId); }}
 														)
 													}
@@ -228,7 +221,7 @@ function clearAllTables(tables){
 	tables.forEach(function(table){
 		if(table.Id !== "empty"){
 		table.Status = "1";
-		document.getElementById(table.Id).src = "img/table.jpg";
+		document.getElementById(table.Id).src = "img/tables/tableGreen.png";
 		document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 	}
 	});
@@ -251,11 +244,11 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 								return;
 						if(shouldReserve.Id === table.Id){
 							table.Status = "2";
-							document.getElementById(table.Id).src = "img/table1.jpg";
+							document.getElementById(table.Id).src = "img/tables/tableRed.png";
 							document.getElementById(table.Id).className = "pointer-events-none";
 						}else{
 							table.Status = "1";
-							document.getElementById(table.Id).src = "img/table.jpg";
+							document.getElementById(table.Id).src = "img/tables/tableGreen.png";
 							document.getElementById(table.Id).className = document.getElementById(table.Id).className.replace("pointer-events-none", "");
 						}
 			}
@@ -293,7 +286,7 @@ function bookPressed(){
 			}
 			if(id === table.Id){
 					table.Status = "2";
-					document.getElementById(table.Id).src = "img/table1.jpg";
+					document.getElementById(table.Id).src = "img/tables/tableRed.png";
 					document.getElementById(table.Id).className = "pointer-events-none";
 			}
 		});

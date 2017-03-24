@@ -74,7 +74,7 @@ class LoginPage extends React.Component{
 																						 style : {marginBottom : "20px"}}),
 							React.createElement("button", { className : "btn saveUser signInButton",
 																							type : "button",
-																							onClick : () => saveUser()}, "Save")
+																							onClick : () => saveUser()}, "Register")
 						)
 					)
 				),

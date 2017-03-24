@@ -49,7 +49,6 @@ var app = {
                 var elem = document.getElementById('sliderSwipe');
                 window.sliderSwipe = Swipe(elem, {
                    startSlide: 0,
-                   auto: 3000,
                    continuous: false,
                    disableScroll: true,
                    stopPropagation: true,
@@ -61,7 +60,7 @@ var app = {
                                         } else {
                                           document.getElementById("goLeft").className += "hidden";
                                         }
-                                        if(index === 6){
+                                        if(index === 5){
                                           Utils.goToLogin();
                                         }
                    }
