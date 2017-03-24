@@ -265,6 +265,10 @@ function updateTablesStatus(bookings, currentRestaurant, selectedDate){
 }
 
 function bookPressed(){
+	if(typeof this.date === "object"){
+		this.date = this.date.value;
+		this.time = this.time.value;
+	}
 	if(!this.date || !this.time){
 		Utils.showAndHideError("noDateTime");
 		return;
