@@ -28,7 +28,7 @@
 <icon src="www/img/icon.png" platform="android" density="xhdpi" />
     <platform name="android">
         <allow-intent href="market:*" />
-
+        
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
