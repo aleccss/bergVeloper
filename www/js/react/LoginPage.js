@@ -116,14 +116,6 @@ class LoginPage extends React.Component{
 	}
 }
 /** ---===== CODE =====--- **/
-
-window.onclick = function(event) {
-	var signUpPopup = document.getElementById("signUpPopup");
-  if(event.target == signUpPopup) {
-    signUpPopup.style.display = "none";
-  }
-}
-
 function registerClick() {
 	var signUpPopup = document.getElementById("signUpPopup");
 	signUpPopup.style.display = "block";
