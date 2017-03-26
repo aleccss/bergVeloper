@@ -90,20 +90,6 @@ class LoginPage extends React.Component{
 			),
 			React.createElement("div", {className : "row", style : { height : "20px"}})
 		 ),
-		//  React.createElement("div", {className : "container"},
-		//    React.createElement("div", {className : "col-xs-2"}),
-		// 	 React.createElement("div", {className : "col-xs-4"},
-		// 	   React.createElement("img", { className : "fgButtons",
-		// 		 															id : "FbButton",
-		// 																	src : "img/icons/facebook.png"})
-		//    ),
-		// 	 React.createElement("div", {className : "col-xs-4"},
-		// 	 	 React.createElement("img", { className : "fgButtons",
-		// 																  id : "GoogleButton",
-		// 																  src : "img/icons/googlePlus.png"})
-		//    ),
-		// 	 React.createElement("div", {className : "col-xs-2"})
-		 //  ),
 		 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"errorLogin", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
 	 		 React.createElement("strong", null, "ERROR! "),
 			 "Invalid username or password."
@@ -143,8 +129,16 @@ function saveUser() {
     }
     Model.saveUser(user);
 		users.push(user);
+		updateFields(user);
   }
 };
+
+function updateFields(user){
+	var signUpPopup = document.getElementById("signUpPopup");
+	signUpPopup.style.display = "none";
+	document.getElementById("loginUsername").value = user.username;
+	document.getElementById("loginPassword").value = user.password;
+}
 
 function signInClick() {
 	 users = Session.users;
