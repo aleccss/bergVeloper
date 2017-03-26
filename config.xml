@@ -17,18 +17,14 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <!-- Default application icon -->
-    <icon src="www/img/icon.png" />
-<!--
-    Default icon should work, but cordova don't overwrite
-    the default on all densities
--->
-<icon src="www/img/icon.png" platform="android" density="ldpi" />
-<icon src="www/img/icon.png" platform="android" density="mdpi" />
-<icon src="www/img/icon.png" platform="android" density="hdpi" />
-<icon src="www/img/icon.png" platform="android" density="xhdpi" />
+    <icon src="www/img/icon/icon.png" />
+    <icon src="www/img/icon/icon.png" platform="android" density="ldpi" />
+    <icon src="www/img/icon/icon.png" platform="android" density="mdpi" />
+    <icon src="www/img/icon/icon.png" platform="android" density="hdpi" />
+    <icon src="www/img/icon/icon.png" platform="android" density="xhdpi" />
     <platform name="android">
         <allow-intent href="market:*" />
-        
+
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
