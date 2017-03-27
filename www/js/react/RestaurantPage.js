@@ -302,9 +302,10 @@ function bookPressed(){
 	});
 
   currentRestaurant.Bookings.push(booking);
-		Model.processBooking(booking);
-		Utils.showAndHideError("tableBooked");
-	}
+	Model.processBooking(booking);
+	Utils.showAndHideError("tableBooked");
+	displayRestaurant(currentRestaurantId);
+}
 
 function getSelectedTables(tables){
 	var selectedTables = [];
