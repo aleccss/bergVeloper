@@ -76,10 +76,7 @@ class LoginPage extends React.Component{
 																							type : "button",
 																							onClick : () => saveUser()}, "Register")
 						),
-						React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"duplicateUser", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-			 	 		 React.createElement("strong", null, "ERROR! "),
-			 			 "Username already exists."
-			 		 )
+						Utils.createAlert("duplicateUser", "ERROR! ","Username already exists.")
 					)
 				),
 				React.createElement("div", {className : "col-xs-2"})
@@ -94,14 +91,8 @@ class LoginPage extends React.Component{
 			),
 			React.createElement("div", {className : "row", style : { height : "20px"}})
 		 ),
-		 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"errorLogin", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-	 		 React.createElement("strong", null, "ERROR! "),
-			 "Invalid username or password."
-		 ),
-		 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"emptyLogin", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-	 		 React.createElement("strong", null, "ERROR! "),
-			 "Empty username or password."
-		 )
+		 Utils.createAlert("errorLogin", "ERROR! ","Invalid username or password."),
+		 Utils.createAlert("emptyLogin", "ERROR! ","Empty username or password.")
 		);
 	}
 }

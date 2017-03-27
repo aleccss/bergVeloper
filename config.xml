@@ -22,6 +22,7 @@
     <icon src="www/img/icon/icon.png" platform="android" density="mdpi" />
     <icon src="www/img/icon/icon.png" platform="android" density="hdpi" />
     <icon src="www/img/icon/icon.png" platform="android" density="xhdpi" />
+    <access origin="tel:*" launch-external="yes" />
     <platform name="android">
         <allow-intent href="market:*" />
 

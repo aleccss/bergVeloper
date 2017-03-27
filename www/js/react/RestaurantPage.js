@@ -42,6 +42,7 @@ class Tabs extends React.Component{
 	var about = parseProp(this.props.about);
 	var menu = parseProp(this.props.menu);
 	var tables = this.props.tables;
+	var phone = this.props.phone;
 	var classDisabled = "";
 		if(!Session.loggedUser){
 			classDisabled = " disabled";
@@ -114,14 +115,9 @@ class Tabs extends React.Component{
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
 										React.createElement("button",	{ className: "btn reserveButton central-content margin-top-10px tablesLayout", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-							 	 		 React.createElement("strong", null, "ERROR! "),
-							 			 "No table selected."
-							 		 ),
-									 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-										React.createElement("strong", null, "ERROR! "),
-										"No date/time selected."
-									),
+										React.createElement("a", {className : "btn central-content margin-top-10px tablesLayout callBtn", href : phone}, "Call restaurant"),
+										Utils.createAlert("noTableSelected", "ERROR! ","No table selected."),
+									 	Utils.createAlert("noDateTime", "ERROR! ","No date/time selected."),
 									React.createElement("div", {className : "container alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
 									 React.createElement("strong", null, "SUCCESS! "),
 									 "Tables successfully booked."
@@ -165,7 +161,7 @@ class DisplayRestaurant extends React.Component{
 		var currentRestaurant = findRestaurant();
 		return React.createElement("div",	null,
 				React.createElement(Header, { name: currentRestaurant.Name, picture: currentRestaurant.Picture }),
-				React.createElement(Tabs, { about: currentRestaurant.About, menu: currentRestaurant.Menu, tables: currentRestaurant.Tables })
+				React.createElement(Tabs, { about: currentRestaurant.About, menu: currentRestaurant.Menu, tables: currentRestaurant.Tables, phone: "tel:" + currentRestaurant.Phone })
 			);
 	}
 }

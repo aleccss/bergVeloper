@@ -445,3 +445,9 @@ p {
 }
 
 /* END required styles */
+
+.callBtn {
+  color: white;
+  border-radius: 0px;
+  margin-top: 40px;
+}
