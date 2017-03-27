@@ -98,5 +98,9 @@ var Utils = {
       result = dateTime.replace("T", " ");
     }
     return result;
+  },
+  createAlert : function(id, type, text){
+    return React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:id, style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
+               React.createElement("strong", null,type),text)
   }
 };

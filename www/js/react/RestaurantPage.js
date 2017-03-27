@@ -114,14 +114,8 @@ class Tabs extends React.Component{
 									React.createElement("div", { className : "row"},
 										React.createElement(DisplayTables, { tables : tables }),
 										React.createElement("button",	{ className: "btn reserveButton central-content margin-top-10px tablesLayout", onClick: function onClick() {	return bookPressed(); } },	"Reserve"),
-										React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noTableSelected", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-							 	 		 React.createElement("strong", null, "ERROR! "),
-							 			 "No table selected."
-							 		 ),
-									 React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"noDateTime", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-										React.createElement("strong", null, "ERROR! "),
-										"No date/time selected."
-									),
+										Utils.createAlert("noTableSelected", "ERROR! ","No table selected."),
+									 	Utils.createAlert("noDateTime", "ERROR! ","No date/time selected."),
 									React.createElement("div", {className : "container alert alert-success margin-top-10px", id:"tableBooked", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
 									 React.createElement("strong", null, "SUCCESS! "),
 									 "Tables successfully booked."
