@@ -76,10 +76,7 @@ class LoginPage extends React.Component{
 																							type : "button",
 																							onClick : () => saveUser()}, "Register")
 						),
-						React.createElement("div", {className : "container alert alert-danger margin-top-10px", id:"duplicateUser", style : {display : "none", width : "90%", textAlign: "center", textTransform: "none"}},
-			 	 		 React.createElement("strong", null, "ERROR! "),
-			 			 "Username already exists."
-			 		 )
+						Utils.createAlert("duplicateUser", "ERROR! ","Username already exists.")
 					)
 				),
 				React.createElement("div", {className : "col-xs-2"})
