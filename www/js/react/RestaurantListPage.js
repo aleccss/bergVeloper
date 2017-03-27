@@ -172,6 +172,10 @@ window.onclick = function(event) {
   if(event.target == myRes) {
     myRes.style.display = "none";
   }
+  var signUpPopup = document.getElementById("signUpPopup");
+  if(event.target == signUpPopup) {
+    signUpPopup.style.display = "none";
+  }
 }
 function myResClick() {
 	var myRes = document.getElementById("myres");
@@ -191,7 +195,7 @@ function displayRestaurant(id){
   render(appState);
 }
 
-function signOut(){  
+function signOut(){
   window.localStorage.setItem("loggedUser", null);
   Session.loggedUser.bookings = [];
   Session.loggedUser = null;
