@@ -6,9 +6,10 @@ function findCurrentPage(state){
 			currentPage = "";
 		}
 		var app;
-		if(currentPage === "slider"){
-			app = React.createElement(Slider);
-		} else if(currentPage === "all"){
+		// if(currentPage === "slider"){
+		// 	app = React.createElement(Slider);
+		// } else
+		 if(currentPage === "all" || currentPage === "slider"){
 			app = React.createElement("div",null,
 							React.createElement(AllRestaurants, { restaurants : state.getState()[0].Restaurants,
 																										filtered : state.getState()[0].Filtered,
