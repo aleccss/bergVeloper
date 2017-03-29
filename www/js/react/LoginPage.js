@@ -76,7 +76,8 @@ class LoginPage extends React.Component{
 																							type : "button",
 																							onClick : () => saveUser()}, "Register")
 						),
-						Utils.createAlert("duplicateUser", "ERROR! ","Username already exists.")
+						Utils.createAlert("duplicateUser", "ERROR! ","Username already exists."),
+						Utils.createAlert("emptyField", "ERROR! ", "Empty username/password/phone.")
 					)
 				),
 				React.createElement("div", {className : "col-xs-2"})
@@ -133,7 +134,9 @@ function saveUser() {
 			Utils.showAndHideError("duplicateUser");
 		}
 
-  }
+  }else{
+		Utils.showAndHideError("emptyField");
+	}
 };
 
 function updateFields(user){
