@@ -43,35 +43,35 @@ var app = {
                 });
               });
               Session.setBookings(data);
-              if(window.localStorage.getItem("has_run") === null || window.localStorage.getItem("has_run") === "null"){
-                Utils.showTutorialPage();
-                window.localStorage.setItem("has_run", "true");
-                var elem = document.getElementById('sliderSwipe');
-                window.sliderSwipe = Swipe(elem, {
-                   startSlide: 0,
-                   continuous: false,
-                   disableScroll: true,
-                   stopPropagation: true,
-                   callback: function(index, element) {},
-                   //set index to last page, it should be an image with bgColor as bg
-                   transitionEnd: function(index, element) {
-                                        if(index > 0){
-                                          document.getElementById("goLeft").className = document.getElementById("goLeft").className.replace("hidden", "");
-                                        } else {
-                                          document.getElementById("goLeft").className += "hidden";
-                                        }
-                                        if(index === 5){
-                                          Utils.goToLogin();
-                                        }
-                   }
-                });
-              } else {
-                if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
+              // if(window.localStorage.getItem("has_run") === null || window.localStorage.getItem("has_run") === "null"){
+              //   Utils.showTutorialPage();
+              //   window.localStorage.setItem("has_run", "true");
+              //   var elem = document.getElementById('sliderSwipe');
+              //   window.sliderSwipe = Swipe(elem, {
+              //      startSlide: 0,
+              //      continuous: false,
+              //      disableScroll: true,
+              //      stopPropagation: true,
+              //      callback: function(index, element) {},
+              //      //set index to last page, it should be an image with bgColor as bg
+              //      transitionEnd: function(index, element) {
+              //                           if(index > 0){
+              //                             document.getElementById("goLeft").className = document.getElementById("goLeft").className.replace("hidden", "");
+              //                           } else {
+              //                             document.getElementById("goLeft").className += "hidden";
+              //                           }
+              //                           if(index === 5){
+              //                             Utils.goToLogin();
+              //                           }
+              //      }
+              //   });
+              // } else {
+              //  if(!window.localStorage.getItem("loggedUser") || window.localStorage.getItem("loggedUser") === "null"){
                   Utils.goToLogin();
-                } else {
-                  Utils.goToAllPage();
-                }
-              }
+                //} else {
+                  //Utils.goToAllPage();
+                //}
+              // }
             });
           });
         });
