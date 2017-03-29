@@ -302,6 +302,12 @@ function bookPressed(){
 	Model.processBooking(booking);
 	Utils.showAndHideError("tableBooked");
 	displayRestaurant(currentRestaurantId);
+	resetDate();
+}
+
+function resetDate(){
+	this.date = "";
+	this.time = "";
 }
 
 function getSelectedTables(tables){
